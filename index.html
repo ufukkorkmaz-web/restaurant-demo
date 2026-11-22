@@ -1,0 +1,376 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#111716"><title>Gourmet · Private Dining 3D Reservations</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--gold:#d6aa70;--cream:#f2e7d7;--dark:#111714;--panel:#151b1bf2}*{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#101615;color:#f6eee4;font-family:'DM Sans',sans-serif}button,input,select{font:inherit}button{cursor:pointer}button:focus-visible,input:focus-visible,select:focus-visible{outline:2px solid #f0c38a;outline-offset:3px}#scene{position:absolute;inset:0}canvas{display:block;touch-action:none}.top{position:absolute;top:0;left:0;right:0;z-index:10;padding:23px clamp(18px,3.5vw,60px);display:flex;justify-content:space-between;align-items:center;pointer-events:none;background:linear-gradient(#080d0bdc,transparent)}.top>*{pointer-events:auto}.brand{font:500 29px 'Playfair Display',serif;letter-spacing:-.03em}.brand b{color:#cda171}.brand small{display:block;font:600 9px 'DM Sans',sans-serif;letter-spacing:.31em;text-transform:uppercase;color:#c2b5a5;margin-top:5px}.right{display:flex;gap:9px;align-items:center;flex-wrap:wrap;justify-content:flex-end}.view-toggle{display:flex;padding:4px;border:1px solid #e8d5b343;background:#151c1bdc;border-radius:99px;gap:2px}.view-toggle button{border:0;background:transparent;color:#d9caba;border-radius:99px;padding:8px 12px;font:700 11px "DM Sans",sans-serif}.view-toggle button.active{background:#d3a670;color:#15201e}.view-help{position:absolute;z-index:9;bottom:78px;left:50%;transform:translateX(-50%);background:#111a18d9;border:1px solid #ffffff22;padding:8px 15px;border-radius:30px;color:#e4d4bb;font-size:11px;white-space:nowrap}.ghost,.solid{border-radius:99px;border:1px solid #e8d5b343;padding:11px 17px;background:#151c1bd6;color:#f3e6d5;font-size:12px;font-weight:700;backdrop-filter:blur(15px);transition:.2s}.ghost:hover{background:#31413c}.solid{background:#d3a670;color:#1b201b;border-color:#d3a670}.solid:hover{background:#f2c88e}.heading{position:absolute;left:clamp(18px,3.5vw,60px);top:108px;pointer-events:none;text-shadow:0 2px 15px #000a}.eyebrow{font-size:10px;letter-spacing:.27em;color:#edc48f;text-transform:uppercase;font-weight:700}.heading h1{font:400 clamp(27px,3vw,46px)/1.17 'Playfair Display',serif;margin:9px 0}.heading p{font-size:12px;color:#d2ccc2;max-width:320px;line-height:1.6}.bottom{position:absolute;bottom:24px;left:50%;transform:translateX(-50%);display:flex;align-items:center;gap:14px;border:1px solid #f1e3ce27;background:#101715d9;backdrop-filter:blur(20px);padding:12px 17px;border-radius:100px;font-size:11px;color:#e0d5c8;white-space:nowrap;box-shadow:0 15px 40px #0008}.key{display:inline-flex;min-width:23px;height:23px;padding:0 5px;align-items:center;justify-content:center;border:1px solid #c9b69d70;border-radius:5px;color:#fff;font-size:10px}.sep{width:1px;height:21px;background:#aaa5}.legend{position:absolute;bottom:112px;left:clamp(18px,3.5vw,60px);display:flex;flex-direction:column;gap:8px;font-size:11px;color:#efeadf;background:#111a18b8;border:1px solid #ffffff16;border-radius:15px;padding:13px 16px;backdrop-filter:blur(14px)}.dot{width:8px;height:8px;display:inline-block;border-radius:50%;margin-right:7px}.available{background:#91c6a6}.reserved{background:#c77769}.selected-dot{background:#e8bc7c}.toast{position:absolute;top:110px;right:25px;padding:12px 16px;border-radius:12px;background:#1b2922;border:1px solid #a7d1b655;color:#e4f4e4;font-size:12px;opacity:0;transform:translateY(-8px);transition:.3s;pointer-events:none}.toast.show{opacity:1;transform:none}.side{position:absolute;right:22px;top:50%;transform:translateY(-50%);width:min(365px,calc(100vw - 36px));max-height:calc(100vh - 130px);overflow:auto;z-index:20;background:linear-gradient(145deg,#1b2322f7,#0f1616f8);border:1px solid #e4cba73d;box-shadow:0 24px 70px #000a;border-radius:23px;padding:27px;display:none;backdrop-filter:blur(20px)}.side.open{display:block;animation:appear .22s ease}@keyframes appear{from{opacity:0;transform:translateY(-47%)}to{opacity:1;transform:translateY(-50%)}}.close{float:right;border:1px solid #ffffff29;background:#ffffff0b;color:#eee;border-radius:50%;width:29px;height:29px;font-size:20px;line-height:1}.side .tag{font-size:10px;letter-spacing:.19em;font-weight:700;text-transform:uppercase;color:#d4a877}.side h2{font:400 36px 'Playfair Display',serif;margin:13px 0 4px}.side .desc{font-size:12px;line-height:1.7;color:#bdbab0;margin:8px 0 18px}.meta{display:flex;gap:9px;flex-wrap:wrap;margin-bottom:20px}.pill{font-size:11px;background:#ffffff0b;border:1px solid #ffffff1b;border-radius:100px;padding:8px 11px}.form-row{margin-top:13px}.form-row label{display:block;font-size:10px;text-transform:uppercase;letter-spacing:.14em;color:#d2c8b7;font-weight:700;margin-bottom:8px}.form-row input,.form-row select{width:100%;border-radius:11px;border:1px solid #ffffff29;color:#eee;background:#ffffff0d;padding:12px 12px;outline:none;color-scheme:dark}.form-row select option{background:#1c2422}.two{display:grid;grid-template-columns:1fr 1fr;gap:10px}.submit{width:100%;margin-top:20px;border:0;background:#d3a670;color:#1a1b16;font-size:12px;font-weight:700;border-radius:12px;padding:15px}.submit:disabled{opacity:.45;cursor:not-allowed}.note{color:#a5a9a1;font-size:10px;line-height:1.6;margin:12px 0 0}.reservations{position:absolute;top:80px;right:28px;z-index:19;width:300px;background:#141b1bf5;border:1px solid #ffffff2b;border-radius:19px;padding:20px;display:none;box-shadow:0 18px 55px #0008}.reservations.open{display:block}.reservations h3{font:25px 'Playfair Display',serif;margin:2px 0 13px}.booking{padding:11px 0;border-top:1px solid #ffffff1a;font-size:12px}.booking small{color:#bdafa0;display:block;margin-top:4px}.booking button{background:none;border:0;color:#e1b17c;padding:6px 0;font-size:11px}.mobile{position:absolute;left:16px;bottom:26px;display:none;gap:8px}.mobile button{border:1px solid #ffffff42;background:#111a18db;color:#fff;border-radius:12px;width:46px;height:46px;font-size:20px}.loading{position:absolute;inset:0;background:#101716;z-index:50;display:grid;place-content:center;text-align:center;transition:opacity .55s}.loading.hide{opacity:0;pointer-events:none}.loading strong{font:36px 'Playfair Display',serif;color:#ebdbca}.loading p{font-size:12px;color:#b5aa9e;letter-spacing:.1em}.no3d{position:absolute;inset:0;display:none;place-items:center;padding:30px;text-align:center;background:#121919;z-index:55}@media(max-width:800px){.view-toggle button{padding:7px 9px;font-size:10px}.view-help{bottom:65px;font-size:10px}.top .right{max-width:73%}.top{padding:17px}.brand{font-size:23px}.heading{top:92px;left:18px}.heading h1{font-size:30px}.heading p{max-width:240px}.bottom{bottom:20px;font-size:10px;max-width:90%;overflow:hidden}.bottom .detail{display:none}.legend{bottom:88px;left:16px}.side{right:10px;top:50%;max-height:80vh;padding:21px}.mobile{display:flex;bottom:74px}.mobile .v{display:flex;gap:4px;flex-direction:column}.mobile .h{display:flex;gap:4px}.reservations{right:10px;top:65px}}@media(max-width:500px){.heading p{display:none}.legend{font-size:10px}.bottom{left:auto;right:10px;transform:none}.mobile{bottom:77px}.right{gap:5px}.ghost,.solid{padding:9px 10px;font-size:11px}}
+
+.preorder-invite{margin:18px 0 1px;padding:17px 17px 15px;background:linear-gradient(135deg,#42352480,#221e19c9);border:1px solid #d6aa7050;border-radius:15px}.preorder-eyebrow{font-size:9px;letter-spacing:.17em;text-transform:uppercase;color:#e7b982;font-weight:700}.preorder-invite h3{font:400 23px 'Playfair Display',serif;margin:8px 0 5px;color:#f6dfbd}.preorder-invite p{font-size:11px;line-height:1.6;color:#ddcdb8;margin:0 0 12px}.preorder-launch{width:100%;background:transparent;border:1px solid #ddba8c91;border-radius:10px;color:#f9daa7;padding:11px 12px;font-size:12px;font-weight:700}.preorder-launch:hover{background:#d4ac7622}.preorder-summary{margin:9px 0 0!important;color:#eac595!important}.preorder-backdrop{position:fixed;inset:0;z-index:40;background:#060908cb;backdrop-filter:blur(7px);display:none;align-items:center;justify-content:center;padding:18px}.preorder-backdrop.open{display:flex}.preorder-dialog{width:min(480px,100%);max-height:90vh;overflow-y:auto;background:linear-gradient(155deg,#222a28,#111817);border:1px solid #cda7736a;border-radius:23px;padding:27px;box-shadow:0 24px 90px #000c}.preorder-dialog h2{font:400 31px/1.16 'Playfair Display',serif;margin:12px 25px 10px 0;color:#f6e6cc}.preorder-dialog>p:not(.note){font-size:12px;color:#c5b7a5;line-height:1.65}.preorder-items{margin:20px 0 16px;border-top:1px solid #ffffff20}.preorder-item{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:14px 0;border-bottom:1px solid #ffffff20}.preorder-item strong{display:block;font-size:13px;color:#f0e7db;font-weight:600}.preorder-item small{display:block;font-size:10px;color:#b5a898;margin-top:4px}.preorder-qty{display:flex;align-items:center;gap:10px;flex-shrink:0}.preorder-qty button{width:30px;height:30px;border-radius:50%;border:1px solid #d6aa7070;background:#d6aa701c;color:#f5d3a4;font-size:17px}.preorder-qty output{min-width:14px;text-align:center;font-size:13px}.preorder-notes-label{display:block;color:#d8c7b2;font-size:11px;margin:14px 0 8px}.preorder-dialog textarea{display:block;width:100%;border:1px solid #ffffff32;border-radius:10px;background:#ffffff0c;color:white;padding:12px;font:12px 'DM Sans',sans-serif;resize:vertical;color-scheme:dark}.preorder-dialog .submit{margin-top:14px}
+
+/* Viewport-fit reservation experience: keep the scene visible, with no unnecessary form scrolling. */
+.side{
+  width:min(410px,calc(100vw - 32px));
+  padding:clamp(15px,2.2vh,22px);
+  max-height:calc(100dvh - 32px);
+  overscroll-behavior:contain;
+  scrollbar-width:thin;
+  scrollbar-color:#a98961 transparent;
+}
+.side h2{font-size:clamp(26px,3.7vh,33px);margin:5px 0 4px;line-height:1.1}
+.side .desc{margin:5px 0 10px;line-height:1.4;font-size:11px}
+.side .meta{gap:6px;margin-bottom:8px}
+.side .pill{font-size:10px;padding:5px 8px}
+.side .tag{font-size:9px}
+#booking-form{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);column-gap:10px;row-gap:9px;align-items:start}
+#booking-form>.two{display:contents}
+#booking-form .form-row{margin:0;min-width:0}
+#booking-form .form-row label{margin-bottom:5px;font-size:9px;letter-spacing:.09em}
+#booking-form .form-row input,#booking-form .form-row select{min-width:0;max-width:100%;height:37px;padding:7px 9px;border-radius:9px;font-size:12px}
+#booking-form #email{width:100%}
+#booking-form>.form-row:has(#email){grid-column:1/-1}
+#booking-form>.preorder-invite,#booking-form>.submit,#booking-form>.note{grid-column:1/-1}
+#booking-form .preorder-invite{margin:1px 0 0;padding:10px 13px;border-radius:12px}
+#booking-form .preorder-invite h3{font-size:19px;margin:3px 0 2px;line-height:1.2}
+#booking-form .preorder-invite p{font-size:10px;line-height:1.4;margin-bottom:6px}
+#booking-form .preorder-launch{padding:8px 9px;font-size:11px}
+#booking-form .preorder-summary{margin:5px 0 0!important}
+#booking-form .submit{margin-top:0;padding:11px 12px}
+#booking-form>.note{margin:0;font-size:9px;line-height:1.35}
+@media(max-height:740px){
+  .side{top:50%;max-height:calc(100dvh - 16px);padding:12px 17px}
+  .side h2{font-size:26px;margin:3px 0}
+  .side .desc{margin:3px 0 7px;font-size:10px;line-height:1.3}
+  .side .meta{margin-bottom:6px}
+  #booking-form{row-gap:6px}
+  #booking-form .form-row input,#booking-form .form-row select{height:33px;padding:5px 8px}
+  #booking-form .preorder-invite{padding:8px 11px}
+  #booking-form .preorder-invite h3{font-size:17px}
+  #booking-form .preorder-launch{padding:7px 9px}
+  #booking-form .submit{padding:9px 10px}
+}
+@media(max-width:600px){
+  .side{right:8px;width:min(390px,calc(100vw - 16px));max-height:calc(100dvh - 20px);padding:15px}
+  .side h2{font-size:28px}
+  .top:has(~ .side.open) .right{opacity:.65}
+}
+@media(max-width:360px){
+  #booking-form{column-gap:6px}
+  .side{padding:12px}
+  .side .meta{gap:4px}
+  .side .pill{font-size:9px}
+}
+/* Focused, keyboard-safe layout on exceptionally short displays. */
+@media(max-height:520px){
+  .side{top:8px;transform:none;max-height:calc(100dvh - 16px)}
+  .side.open{animation:none}
+}
+
+/* Step between tables without leaving the reservation panel. */
+.side>.close{position:absolute;top:13px;right:15px;float:none;z-index:2}
+.side>.tag{padding-right:35px}
+.table-heading{display:flex;align-items:center;justify-content:flex-start;gap:10px;margin:5px 0 5px;min-width:0;padding-right:35px}
+.side .table-heading h2{margin:0;min-width:0;white-space:nowrap;flex:0 0 auto}
+.table-switch{display:inline-flex;align-items:center;gap:5px;flex:0 0 auto;margin-left:0}
+.table-switch button{display:grid;place-items:center;width:34px;height:34px;border-radius:50%;border:1px solid #d5ae7a76;background:#d6aa7018;color:#f7d3a5;font-size:19px;line-height:1;transition:background .18s,transform .18s}
+.table-switch button:hover{background:#d6aa7040;transform:translateY(-1px)}
+.table-switch button:active{transform:scale(.96)}
+@media(max-height:740px){.table-switch button{width:30px;height:30px;font-size:17px}}
+</style></head><body><div id="scene"></div><div class="loading" id="loading"><strong>Gourmet<span style="color:#d6aa70">.</span></strong><p data-i18n="loading">PREPARING YOUR PRIVATE TOUR</p></div><div class="no3d" id="no3d"><div><h2 data-i18n="no3d">3D preview unavailable</h2><p data-i18n="no3dExplain">This experience requires WebGL and an internet connection to load the 3D engine.</p></div></div>
+<header class="top"><div class="brand">Gourmet<b>.</b><small data-i18n="brandTag">THE PRIVATE DINING EXPERIENCE</small></div><div class="right"><button class="ghost" id="reset" data-i18n="reset">↺ Reset view</button><button class="ghost" id="mine"><span data-i18n="myReservations">My reservations</span> <span id="count">0</span></button><button class="solid" id="choose" data-i18n="explore">Explore tables</button></div></header>
+<div id="selected-marker" aria-live="polite" style="display:none;position:absolute;z-index:12;pointer-events:none;transform:translate(-50%,-100%);border:1px solid #ffe1aeaa;border-radius:99px;padding:8px 14px;background:#201c15e8;color:#ffe6b7;font-size:12px;font-weight:700;white-space:nowrap;box-shadow:0 0 26px #d9a36077" data-i18n="selectedMarker">Selected table</div><div class="view-help" id="view-help" data-i18n="help">Eye level · WASD to walk · drag to look · select a table</div><div class="heading"><div class="eyebrow" data-i18n="eyebrow">An immersive table selection</div><h1 data-i18n-html="heading">Find your perfect<br><i>place at the table.</i></h1><p data-i18n="intro">Inspired directly by the supplied interior: charcoal panelled walls, amber leather banquettes, grey chairs, round marble tables, the sculptural ceiling and the copper-lit bar. Select any table.</p></div>
+<div class="legend"><span><i class="dot available"></i><span data-i18n="available">Available</span></span><span><i class="dot reserved"></i><span data-i18n="reserved">Reserved</span></span><span><i class="dot selected-dot"></i><span data-i18n="selected">Selected</span></span></div><div class="bottom"><span><span class="key">W</span><span class="key">A</span><span class="key">S</span><span class="key">D</span> <span data-i18n="move">Move</span></span><span class="sep"></span><span data-i18n="drag">Drag to look</span><span class="sep detail"></span><span class="detail" data-i18n="click">Click a table to reserve</span></div><div class="mobile" id="mobile"><div class="v"><button data-move="forward">↑</button><div class="h"><button data-move="left">←</button><button data-move="backward">↓</button><button data-move="right">→</button></div></div></div><div class="toast" id="toast"></div>
+<aside class="side" id="side"><button class="close" id="close" aria-label="Close">×</button><div class="tag" data-i18n="exclusive">Your exclusive table</div><div class="table-heading"><h2 id="table-title">Table 01</h2><nav class="table-switch" aria-label="Navigate tables" id="table-switch"><button type="button" id="table-prev" aria-label="Previous table" title="Previous table">&#8592;</button><button type="button" id="table-next" aria-label="Next table" title="Next table">&#8594;</button></nav></div><div class="meta"><span class="pill" id="table-capacity">4 guests</span><span class="pill" id="table-location">Main dining</span><span class="pill" id="table-state">Available</span></div><p class="desc" id="table-description">A lovely place for your evening.</p><form id="booking-form"><div class="two"><div class="form-row"><label for="date" data-i18n="date">Date</label><input id="date" type="date" required></div><div class="form-row"><label for="time" data-i18n="time">Time</label><select id="time" required><option>18:00</option><option>18:30</option><option>19:00</option><option>19:30</option><option>20:00</option><option>20:30</option><option>21:00</option><option>21:30</option></select></div></div><div class="form-row"><label for="party" data-i18n="guests">Guests</label><select id="party" required></select></div><div class="form-row"><label for="guest" data-i18n="yourName">Your name</label><input id="guest" autocomplete="name" data-i18n-placeholder="fullName" placeholder="Full name" maxlength="80" required></div><div class="form-row"><label for="email" data-i18n="email">Email</label><input id="email" type="email" autocomplete="email" placeholder="you@example.com" required></div><section class="preorder-invite"><span class="preorder-eyebrow" data-i18n="preorderEyebrow">A thoughtful touch</span><h3 data-i18n="preorderTitle">Savor every moment.</h3><p data-i18n="preorderPitch">Let us prepare your favorites for your arrival.</p><button type="button" id="preorder-open" class="preorder-launch" data-i18n="preorderButton">Explore pre-ordering →</button><p class="preorder-summary" id="preorder-summary" aria-live="polite"></p></section><button class="submit" id="submit" type="submit" data-i18n="reserve">Reserve this table →</button><p class="note" data-i18n="prototype">Prototype only: reservations are saved in this browser, not sent to a restaurant or payment provider.</p></form></aside><div class="preorder-backdrop" id="preorder-modal" role="dialog" aria-modal="true" aria-labelledby="preorder-modal-title" aria-hidden="true"><div class="preorder-dialog"><button class="close" type="button" id="preorder-close" aria-label="Close">×</button><span class="preorder-eyebrow" data-i18n="preorderEyebrow">A thoughtful touch</span><h2 id="preorder-modal-title" data-i18n="preorderModalTitle">Your evening, beautifully prepared.</h2><p data-i18n="preorderModalDesc">Select any dishes you would like prepared in advance. Your preferences will be included with your reservation in this demo.</p><div class="preorder-items" id="preorder-items"></div><label class="preorder-notes-label" for="preorder-notes" data-i18n="preorderNotesLabel">Preferences or dietary notes</label><textarea id="preorder-notes" maxlength="350" rows="2" data-i18n-placeholder="preorderNotesPlaceholder" placeholder="Optional notes"></textarea><button class="submit" type="button" id="preorder-save" data-i18n="preorderSave">Add to my reservation →</button><p class="note" data-i18n="preorderDisclaimer">Pre-orders are requests only and are not sent to the restaurant or charged in this demo.</p></div></div><aside class="reservations" id="reservations"><button class="close" id="close-mine">×</button><h3 data-i18n="yourReservations">Your reservations</h3><div id="booking-list"></div></aside>
+<script type="module">
+import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.160.1/build/three.module.js';
+// Use the same preference as the Gourmet website. Query parameter also works across local-file previews.
+const LANGUAGES = {"en":{"pageTitle":"Gourmet · 3D Table Reservations","previousTable":"Previous table","nextTable":"Next table","navigateTables":"Navigate tables","brandTag":"THE PRIVATE DINING EXPERIENCE","reference":"Reference","reset":"↺ Reset view","myReservations":"My reservations","explore":"Explore tables","referenceNote":"Original reference image · The room follows this composition; furnishings are modeled, not photo-scanned.","selectedMarker":"Selected table","help":"Eye level · WASD to walk · drag to look · select a table","eyebrow":"An immersive table selection","heading":"Find your perfect<br><i>place at the table.</i>","intro":"Inspired directly by the supplied interior: charcoal panelled walls, amber leather banquettes, grey chairs, round marble tables, the sculptural ceiling and the copper-lit bar. Select any table.","available":"Available","reserved":"Reserved","selected":"Selected","move":"Move","drag":"Drag to look","click":"Click a table to reserve","exclusive":"Your exclusive table","date":"Date","time":"Time","guests":"Guests","yourName":"Your name","email":"Email","reserve":"Reserve this table →","prototype":"Prototype only: reservations are saved in this browser, not sent to a restaurant or payment provider.","yourReservations":"Your reservations","loading":"PREPARING YOUR PRIVATE TOUR","no3d":"3D preview unavailable","no3dExplain":"This experience requires WebGL and an internet connection to load the 3D engine.","fullName":"Full name","table":"Table","guest":"guest","guestsPlural":"guests","occupied":"Reserved for this slot","free":"Available for this slot","alreadyReserved":"Already reserved — choose another time","future":"Please choose a future date.","reservedToast":"Table {table} reserved for {party} on {date} at {time}.","cancel":"Cancel reservation","cancelled":"Reservation cancelled.","none":"No reservations on this device yet.","at":"at","locations":{"Front dining":"Front dining","Main dining":"Main dining","Near the bar":"Near the bar","Intimate corner":"Intimate corner","Banquette":"Banquette","Group dining":"Group dining"},"descriptions":{"Banquette":"Plush cognac leather banquette seating beside the charcoal-panelled walls.","Near the bar":"Enjoy the ambiance of our illuminated marble bar and copper pendant lighting.","Intimate corner":"An intimate, beautifully lit setting for a quieter dinner.","Group dining":"An inviting, spacious table for gathering with friends and family.","default":"A marble-topped table with soft lighting and a lovely view of the dining room."},"preorderEyebrow":"A thoughtful touch","preorderTitle":"Savor every moment.","preorderPitch":"Let us prepare your favorites for your arrival.","preorderButton":"Explore pre-ordering →","preorderModalTitle":"Your evening, beautifully prepared.","preorderModalDesc":"Choose dishes you would like prepared in advance. Add them to your table reservation.","preorderNotesLabel":"Preferences or dietary notes","preorderNotesPlaceholder":"Optional requests or allergies","preorderSave":"Add to my reservation →","preorderDisclaimer":"Demo only: pre-order requests are stored in this browser; nothing is sent to the restaurant or charged.","preorderAdded":"{count} item(s) selected for pre-order","preorderNoItems":"No dishes selected","preorderLabel":"Pre-order","dishNames":["Coastal Octopus","Mediterranean Table","Garden Mezze","Seasonal Dessert"],"dishSub":["Grilled octopus, citrus & herbs","A vibrant spread for sharing","Hummus, olives & vegetables","Ask our kitchen about today’s sweet"],"preorderQty":"Quantity"},"tr":{"pageTitle":"Gourmet · 3D Masa Rezervasyonu","previousTable":"Önceki masa","nextTable":"Sonraki masa","navigateTables":"Masalar arasında geçiş","brandTag":"ÖZEL 3D RESTORAN DENEYİMİ","reference":"Referans Görsel","reset":"↺ Görünümü sıfırla","myReservations":"Rezervasyonlarım","explore":"Masaları keşfet","referenceNote":"Orijinal referans görseli · 3D mekân bu yerleşimi temel alır; mobilyalar fotoğraftan taranmamış, 3D modellenmiştir.","selectedMarker":"Seçilen masa","help":"Göz hizası · WASD ile yürü · sürükleyerek bak · masa seç","eyebrow":"Etkileşimli masa seçimi","heading":"Size en uygun<br><i>masayı keşfedin.</i>","intro":"Paylaştığınız mekândan doğrudan ilham alan tasarım: antrasit panelli duvarlar, konyak rengi deri sedirler, gri sandalyeler, yuvarlak mermer masalar, heykelsi tavan ve bakır ışıklı bar. Bir masa seçin.","available":"Müsait","reserved":"Dolu","selected":"Seçili","move":"Hareket","drag":"Bakmak için sürükleyin","click":"Rezervasyon için bir masaya tıklayın","exclusive":"Size özel masa","date":"Tarih","time":"Saat","guests":"Kişi sayısı","yourName":"Adınız soyadınız","email":"E-posta","reserve":"Bu masayı rezerve et →","prototype":"Demo sürüm: rezervasyonlar yalnızca bu tarayıcıya kaydedilir; restorana veya ödeme sağlayıcısına gönderilmez.","yourReservations":"Rezervasyonlarınız","loading":"3D RESTORAN HAZIRLANIYOR","no3d":"3D görünüm açılamadı","no3dExplain":"Bu deneyim için WebGL desteği ve 3D altyapıyı yüklemek üzere internet bağlantısı gerekir.","fullName":"Ad Soyad","table":"Masa","guest":"kişi","guestsPlural":"kişi","occupied":"Bu saat için dolu","free":"Bu saat için müsait","alreadyReserved":"Masa dolu — başka bir saat seçin","future":"Lütfen bugünün veya ileri bir tarihin seçimini yapın.","reservedToast":"{table} numaralı masa, {date} tarihinde saat {time} için {party} kişilik rezerve edildi.","cancel":"Rezervasyonu iptal et","cancelled":"Rezervasyon iptal edildi.","none":"Bu cihazda henüz rezervasyon yok.","at":"saat","locations":{"Front dining":"Ön salon","Main dining":"Ana salon","Near the bar":"Bar yanı","Intimate corner":"Sakin köşe","Banquette":"Sedir bölümü","Group dining":"Grup masası"},"descriptions":{"Banquette":"Antrasit panelli duvarların yanında, konyak rengi deri sedirlerde konforlu bir yemek deneyimi.","Near the bar":"Aydınlatmalı mermer barın ve bakır sarkıt lambaların keyifli atmosferini yaşayın.","Intimate corner":"Daha sakin bir akşam için sıcak ışıklı ve samimi bir köşe.","Group dining":"Arkadaşlarınız ve ailenizle buluşmak için geniş ve davetkâr bir masa.","default":"Yumuşak aydınlatmalı, salon manzaralı mermer masa."},"preorderEyebrow":"İnce bir dokunuş","preorderTitle":"Her anın tadını çıkarın.","preorderPitch":"Sevdiğiniz lezzetleri siz gelmeden hazırlayalım.","preorderButton":"Ön sipariş seçenekleri →","preorderModalTitle":"Akşamınız özenle hazırlansın.","preorderModalDesc":"Önceden hazırlanmasını istediğiniz lezzetleri seçin. Tercihleriniz masa rezervasyonunuza eklenecek.","preorderNotesLabel":"Tercihleriniz veya alerji notları","preorderNotesPlaceholder":"İsteğe bağlı notlar veya alerjiler","preorderSave":"Rezervasyonuma ekle →","preorderDisclaimer":"Yalnızca demo: ön sipariş talepleri bu tarayıcıda saklanır; restorana gönderilmez ve ödeme alınmaz.","preorderAdded":"Ön sipariş için {count} ürün seçildi","preorderNoItems":"Henüz ürün seçilmedi","preorderLabel":"Ön sipariş","dishNames":["Közde Ahtapot","Akdeniz Sofrası","Bahçe Mezesi","Mevsim Tatlısı"],"dishSub":["Narenciye ve otlarla ızgara ahtapot","Paylaşmalık Akdeniz lezzetleri","Humus, zeytin ve sebzeler","Günün tatlısını mutfağımıza sorun"],"preorderQty":"Adet"},"de":{"pageTitle":"Gourmet · 3D-Tischreservierung","previousTable":"Vorheriger Tisch","nextTable":"Nächster Tisch","navigateTables":"Zwischen Tischen wechseln","brandTag":"DAS EXKLUSIVE 3D-RESTAURANTERLEBNIS","reference":"Referenzbild","reset":"↺ Ansicht zurücksetzen","myReservations":"Meine Reservierungen","explore":"Tische entdecken","referenceNote":"Original-Referenzbild · Der Raum folgt dieser Gestaltung; die Möbel sind 3D-modelliert, nicht fotogescannt.","selectedMarker":"Ausgewählter Tisch","help":"Augenhöhe · Mit WASD gehen · zum Umsehen ziehen · Tisch wählen","eyebrow":"Interaktive Tischauswahl","heading":"Finden Sie Ihren<br><i>Lieblingsplatz.</i>","intro":"Direkt vom Referenzbild inspiriert: anthrazitfarbene Wandpaneele, cognacfarbene Lederbänke, graue Sessel, runde Marmortische, eine skulpturale Decke und eine kupferbeleuchtete Bar. Wählen Sie einen Tisch.","available":"Frei","reserved":"Belegt","selected":"Ausgewählt","move":"Bewegen","drag":"Ziehen zum Umsehen","click":"Tisch zur Reservierung anklicken","exclusive":"Ihr exklusiver Tisch","date":"Datum","time":"Uhrzeit","guests":"Personen","yourName":"Ihr Name","email":"E-Mail","reserve":"Diesen Tisch reservieren →","prototype":"Demo: Reservierungen werden nur in diesem Browser gespeichert und nicht an ein Restaurant oder einen Zahlungsanbieter gesendet.","yourReservations":"Ihre Reservierungen","loading":"IHR 3D-RUNDGANG WIRD VORBEREITET","no3d":"3D-Ansicht nicht verfügbar","no3dExplain":"Für dieses Erlebnis sind WebGL und eine Internetverbindung zum Laden der 3D-Engine erforderlich.","fullName":"Vor- und Nachname","table":"Tisch","guest":"Person","guestsPlural":"Personen","occupied":"Zu dieser Uhrzeit belegt","free":"Zu dieser Uhrzeit verfügbar","alreadyReserved":"Bereits reserviert – andere Uhrzeit wählen","future":"Bitte wählen Sie ein gültiges Datum ab heute.","reservedToast":"Tisch {table} für {party} Personen am {date} um {time} reserviert.","cancel":"Reservierung stornieren","cancelled":"Reservierung storniert.","none":"Noch keine Reservierungen auf diesem Gerät.","at":"um","locations":{"Front dining":"Vorderer Gastraum","Main dining":"Hauptraum","Near the bar":"An der Bar","Intimate corner":"Ruhige Ecke","Banquette":"Bankett","Group dining":"Gruppentisch"},"descriptions":{"Banquette":"Bequeme cognacfarbene Lederbänke an den anthrazitfarbenen Wandpaneelen.","Near the bar":"Genießen Sie das Ambiente unserer beleuchteten Marmorbar und der kupferfarbenen Pendelleuchten.","Intimate corner":"Ein gemütlicher, sanft beleuchteter Platz für einen ruhigeren Abend.","Group dining":"Ein großzügiger Tisch für ein Treffen mit Familie und Freunden.","default":"Ein Marmortisch mit sanftem Licht und schönem Blick in den Gastraum."},"preorderEyebrow":"Ein besonderes Detail","preorderTitle":"Genießen Sie jeden Augenblick.","preorderPitch":"Wir bereiten Ihre Lieblingsgerichte gerne für Ihre Ankunft vor.","preorderButton":"Vorbestellung entdecken →","preorderModalTitle":"Ihr Abend, liebevoll vorbereitet.","preorderModalDesc":"Wählen Sie Gerichte, die für Ihre Ankunft vorbereitet werden sollen. Wir ergänzen Ihre Tischreservierung entsprechend.","preorderNotesLabel":"Wünsche oder Hinweise zu Allergien","preorderNotesPlaceholder":"Optionale Wünsche oder Allergien","preorderSave":"Zur Reservierung hinzufügen →","preorderDisclaimer":"Nur Demo: Vorbestellungen werden in diesem Browser gespeichert; nichts wird an das Restaurant gesendet oder berechnet.","preorderAdded":"{count} Artikel für die Vorbestellung gewählt","preorderNoItems":"Noch keine Gerichte gewählt","preorderLabel":"Vorbestellung","dishNames":["Oktopus von der Küste","Mediterrane Tafel","Garten-Mezze","Saisonales Dessert"],"dishSub":["Gegrillter Oktopus, Zitrus & Kräuter","Mediterrane Vielfalt zum Teilen","Hummus, Oliven & Gemüse","Fragen Sie nach dem Dessert des Tages"],"preorderQty":"Anzahl"}};
+let currentLang='en';
+try {
+ const requested=new URLSearchParams(window.location.search).get('lang');
+ const saved=localStorage.getItem('gourmet-lang');
+ const browser=(navigator.language||'en').slice(0,2).toLowerCase();
+ currentLang=[requested,saved,browser,'en'].find(v=>LANGUAGES[v])||'en';
+ localStorage.setItem('gourmet-lang',currentLang);
+} catch(e) {currentLang='en'}
+const tr=(key)=>LANGUAGES[currentLang][key]??LANGUAGES.en[key]??key;
+function applyRoomLanguage(){
+ document.documentElement.lang=currentLang;
+ document.title=tr('pageTitle');
+ for(const [id,key] of [['table-prev','previousTable'],['table-next','nextTable']]){
+  const el=document.getElementById(id);if(el){el.setAttribute('aria-label',tr(key));el.setAttribute('title',tr(key));}
+ }
+ const switchNav=document.getElementById('table-switch');if(switchNav)switchNav.setAttribute('aria-label',tr('navigateTables'));
+ document.querySelectorAll('[data-i18n]').forEach(el=>el.textContent=tr(el.dataset.i18n));
+ document.querySelectorAll('[data-i18n-html]').forEach(el=>el.innerHTML=tr(el.dataset.i18nHtml));
+ document.querySelectorAll('[data-i18n-placeholder]').forEach(el=>el.placeholder=tr(el.dataset.i18nPlaceholder));
+}
+applyRoomLanguage();
+
+const host=document.getElementById('scene'),loading=document.getElementById('loading');
+const renderer=new THREE.WebGLRenderer({antialias:true,powerPreference:'high-performance'});renderer.setSize(innerWidth,innerHeight);renderer.setPixelRatio(Math.min(devicePixelRatio,2));renderer.shadowMap.enabled=true;renderer.shadowMap.type=THREE.PCFSoftShadowMap;renderer.toneMapping=THREE.ACESFilmicToneMapping;renderer.toneMappingExposure=1.35;renderer.outputColorSpace=THREE.SRGBColorSpace;host.appendChild(renderer.domElement);
+const scene=new THREE.Scene();scene.background=new THREE.Color(0x151a1b);scene.fog=new THREE.FogExp2(0x16191b,.018);
+const camera=new THREE.PerspectiveCamera(69,innerWidth/innerHeight,.05,90);camera.position.set(-1.2,1.72,8.6);let yaw=-.08,pitch=-.07;
+let focusMotion=null;
+const mat=(c,rough=.6,metal=0)=>new THREE.MeshStandardMaterial({color:c,roughness:rough,metalness:metal});
+const wood=mat(0x17191e,.38,.04),woodTrim=mat(0x26262b,.31,.08),copper=mat(0xb37342,.20,.86),gold=mat(0xb59466,.24,.8),marble=mat(0xcbd0d3,.24,.11),seat=mat(0xb77c61,.75),chairMat=mat(0x505159,.79),black=mat(0x15191a,.38,.3),floorMat=mat(0x181c22,.10,.2);
+const box=(w,h,d,m,x,y,z,parent=scene)=>{const o=new THREE.Mesh(new THREE.BoxGeometry(w,h,d),m);o.position.set(x,y,z);o.castShadow=true;o.receiveShadow=true;parent.add(o);return o};
+const cyl=(rt,rb,h,m,x,y,z,parent=scene,n=32)=>{const o=new THREE.Mesh(new THREE.CylinderGeometry(rt,rb,h,n),m);o.position.set(x,y,z);o.castShadow=true;o.receiveShadow=true;parent.add(o);return o};
+const sphere=(r,m,x,y,z,parent=scene)=>{const o=new THREE.Mesh(new THREE.SphereGeometry(r,24,12),m);o.position.set(x,y,z);o.castShadow=true;parent.add(o);return o};
+const glow=(color,intensity,distance,x,y,z)=>{const l=new THREE.PointLight(color,intensity,distance,2);l.position.set(x,y,z);scene.add(l);return l};
+// Room, with panelled charcoal walls and glossy dark stone floor.
+box(24,.13,21,floorMat,0,-.075,0);const roof=box(24,.16,21,wood,0,4.8,0);box(24,4.8,.2,wood,0,2.35,-10.5);box(24,4.8,.2,wood,0,2.35,10.5);box(.2,4.8,21,wood,-12,2.35,0);box(.2,4.8,21,wood,12,2.35,0);
+// tiled floor with slender brass seams
+for(let x=-11.5;x<=11.5;x+=2){box(.013,.008,20.6,mat(0x333a3d,.5,.5),x,.006,0)}for(let z=-9.5;z<=9.5;z+=2){box(23.6,.008,.013,mat(0x30373b,.5,.5),0,.008,z)}
+// moulding on walls
+for(const z of [-10.37,10.37]){for(let x=-10.8;x<11;x+=3.1){box(2.77,.055,.08,woodTrim,x,3.93,z);box(2.77,.055,.08,woodTrim,x,1.18,z);box(.055,2.8,.08,woodTrim,x-1.38,2.52,z);box(.055,2.8,.08,woodTrim,x+1.38,2.52,z)}box(23.8,.16,.16,woodTrim,0,4.42,z);box(23.8,.19,.2,woodTrim,0,.42,z)}
+for(const x of [-11.88,11.88]){for(let z=-9;z<10;z+=3){box(.09,.055,2.72,woodTrim,x,3.91,z);box(.09,.055,2.72,woodTrim,x,1.15,z);box(.09,2.8,.05,woodTrim,x,2.5,z-1.37);box(.09,2.8,.05,woodTrim,x,2.5,z+1.37)}box(.17,.16,20.7,woodTrim,x,4.42,0)}
+const ceilingStartIndex=scene.children.length;
+const cutawayWallObjects=scene.children.filter(o=>o.isMesh&&(o.position.z>10.0||o.position.x>11.7));
+// centre ceiling inset elliptical chandelier with concentric rings
+const ring=(r,t,material,y)=>{const mesh=new THREE.Mesh(new THREE.TorusGeometry(r,t,10,100),material);mesh.rotation.x=Math.PI/2;mesh.position.set(0,y,0);scene.add(mesh)};
+const cream=mat(0xc4b9a2,.9);const ceilingDisc=cyl(5.3,5.3,.038,cream,0,4.67,0,scene,100);ceilingDisc.scale.z=.68;for(let r of [1.15,2.3,3.55,5.05]){let o=new THREE.Mesh(new THREE.TorusGeometry(r,.025,6,100),gold);o.rotation.x=Math.PI/2;o.scale.y=.68;o.position.y=4.59;scene.add(o)}
+for(let a=0;a<12;a++){let angle=a*Math.PI/6;let p=new THREE.Vector3(Math.sin(angle)*4.9,4.59,Math.cos(angle)*3.32);let q=new THREE.Vector3(0,4.59,0);let path=new THREE.BufferGeometry().setFromPoints([p,q]);scene.add(new THREE.Line(path,new THREE.LineBasicMaterial({color:0x776f5e})))}glow(0xffe6b5,75,14,0,4.25,0);
+// Small flush ceiling spotlights
+for(let x=-10;x<=10;x+=3.4)for(let z=-9;z<=9;z+=3.6){if(Math.hypot(x,z)<5.2)continue;const l=cyl(.075,.075,.015,mat(0xf5ecd8,.2),x,4.7,z);l.material.emissive=new THREE.Color(0xe9d8b5);l.material.emissiveIntensity=1.3}
+const ceilingObjects=scene.children.slice(ceilingStartIndex);
+scene.add(new THREE.HemisphereLight(0xf0e7d3,0x272935,2.3));const main=new THREE.DirectionalLight(0xffe2bb,2.2);main.position.set(-5,8,5);main.castShadow=true;main.shadow.mapSize.set(2048,2048);main.shadow.camera.left=-16;main.shadow.camera.right=16;main.shadow.camera.top=16;main.shadow.camera.bottom=-16;main.shadow.bias=-.0004;scene.add(main);
+// Wall sconces
+for(const z of [-10.27,10.27])for(const x of [-8,-1,6]){box(.16,.44,.17,mat(0xe6dbbe,.3),x,2.4,z);box(.19,.5,.08,gold,x,2.4,z+(z<0?.13:-.13));glow(0xffc78d,1.5,3,x,2.4,z+(z<0?.4:-.4))}
+// Banquette sofas against the rear and left wall
+const bench=(x,z,w,rotation=0)=>{const g=new THREE.Group();g.position.set(x,0,z);g.rotation.y=rotation;scene.add(g);box(w,.35,.79,seat,0,.52,0,g);box(w,.95,.22,seat,0,1.07,-.36,g);for(let p=-w/2+.06;p<w/2;p+=1.0)box(.035,.92,.23,mat(0x80533d,.77),p,1.07,-.34,g);box(w,.2,.84,black,0,.22,0,g)};
+bench(-6.6,-9.64,9.2);bench(3.5,-9.64,10.9);bench(-11.33,-4.2,9.0,Math.PI/2);
+// The source image places the long marble bar along the RIGHT WALL,
+// with a bright back-bar and copper domes receding towards the far corner.
+box(1.15,1.07,8.5,wood,10.12,.55,-3.5);
+box(1.57,.12,8.78,marble,9.82,1.14,-3.5);
+box(.075,.12,8.8,gold,9.025,1.045,-3.5);
+for(let i=0;i<3;i++){
+ const z=-7.3+i*2.65;
+ box(.15,2.95,2.12,woodTrim,11.77,2.65,z);
+ box(.14,2.38,1.81,black,11.64,2.74,z);
+ for(let j=0;j<4;j++){
+  box(.27,.034,1.75,marble,11.48,1.72+j*.56,z);
+  for(let k=0;k<7;k++){
+   const bz=z-.69+k*.225, green=mat((k+j)%3?0x286a4b:0x457d59,.16,.4);
+   cyl(.071,.067,.33,green,11.37,1.93+j*.56,bz,scene,12);
+   cyl(.035,.035,.075,gold,11.37,2.13+j*.56,bz,scene,12);
+  }
+ }
+ glow(0xeaffef,2.9,3.7,11.13,3.1,z)
+}
+const domeGeo=new THREE.SphereGeometry(.52,32,16,0,Math.PI*2,0,Math.PI*.52);
+for(let i=0;i<4;i++){
+ const z=-7.0+i*2.18;
+ box(.025,1.45,.025,black,9.17,4.03,z);
+ const dome=new THREE.Mesh(domeGeo,copper);dome.position.set(9.17,3.15,z);dome.rotation.z=Math.PI;scene.add(dome);
+ const disc=cyl(.4,.4,.025,mat(0xffd99c,.3),9.17,3.11,z);disc.material.emissive=new THREE.Color(0xffc67b);disc.material.emissiveIntensity=.85;
+ glow(0xffcf91,5.5,3.6,9.17,2.85,z)
+}
+// Additional pendants suspended above the seating, as seen on the left of the photo.
+for(let x of [-9.2,-6.8,-4.4,-2.0]){
+ box(.018,.85,.018,black,x,4.21,-5.1);
+ const dome=new THREE.Mesh(new THREE.SphereGeometry(.3,24,12,0,Math.PI*2,0,Math.PI*.5),copper);
+ dome.rotation.z=Math.PI;dome.position.set(x,3.8,-5.1);scene.add(dome);
+}
+// Table shapes (individual selectable 3D objects)
+const tables=[], selectable=[];let selected=null;
+// Every selectable surface carries the unique table ID used by booking, lighting and camera.
+function registerPick(mesh,id){mesh.userData.table=id;selectable.push(mesh);return mesh;}
+
+const lamp=(x,z,g)=>{cyl(.095,.12,.14,marble,x,.82,z,g);cyl(.022,.022,.16,gold,x,.98,z,g);const shade=cyl(.18,.2,.23,mat(0xf3eee0,.6),x,1.17,z,g);shade.material.emissive=new THREE.Color(0xffdfae);shade.material.emissiveIntensity=.7};
+// Refined upholstered chairs: a slim, continuous backrest without exposed
+// decorative piping or a protruding secondary back cushion. Geometry is shared.
+const chairShell=new THREE.MeshStandardMaterial({color:0x525158,roughness:.91,metalness:0,flatShading:false}),
+ chairCushion=new THREE.MeshStandardMaterial({color:0x5c5b62,roughness:.96,metalness:0,flatShading:false}),
+ chairLeg=mat(0x665746,.32,.63),chairDark=mat(0x302e32,.88);
+const chairEllipsoid=new THREE.SphereGeometry(1,48,32);
+// Give the back an elegant flared crown rather than a perfect spherical outline.
+const chairBackGeo=chairEllipsoid.clone();
+{const p=chairBackGeo.attributes.position;
+ for(let i=0;i<p.count;i++){
+  const x=p.getX(i),y=p.getY(i),z=p.getZ(i);
+  const flare=1+.115*Math.max(0,y),waist=1-.035*Math.max(0,-y);
+  p.setXYZ(i,x*flare*waist,y,z+.075*(x*x)-.06*y*y);
+ }
+ chairBackGeo.computeVertexNormals();}
+const seatBaseGeo=new THREE.ExtrudeGeometry((()=>{const sh=new THREE.Shape();sh.moveTo(-.24,-.29);sh.bezierCurveTo(-.35,-.27,-.36,-.16,-.36,0);sh.bezierCurveTo(-.36,.22,-.28,.30,0,.30);sh.bezierCurveTo(.28,.30,.36,.22,.36,0);sh.bezierCurveTo(.36,-.16,.35,-.27,.24,-.29);sh.quadraticCurveTo(0,-.33,-.24,-.29);return sh;})(),
+ {depth:.09,bevelEnabled:true,bevelThickness:.038,bevelSize:.031,bevelSegments:7,curveSegments:20,steps:1});
+seatBaseGeo.rotateX(-Math.PI/2);
+const chairLegGeo=new THREE.CylinderGeometry(.020,.033,.45,20,1);
+const chairArmGeo=new THREE.CapsuleGeometry(.062,.25,12,20);
+const chairBraceGeo=new THREE.CylinderGeometry(.022,.025,.22,16);
+function chairPiece(geo,material,parent,pos,scale,id,selectableSurface=false){
+ const m=new THREE.Mesh(geo,material);m.position.set(...pos);if(scale)m.scale.set(...scale);
+ m.castShadow=true;m.receiveShadow=true;parent.add(m);if(selectableSurface)registerPick(m,id);return m;
+}
+function makeChair(x,z,rotation,g,id){
+ const c=new THREE.Group();c.position.set(x,0,z);c.rotation.y=rotation;g.add(c);
+ // A low-profile, upholstered seat keeps its silhouette tailored.
+ chairPiece(seatBaseGeo,chairShell,c,[0,.49,.035],null,id,true);
+ chairPiece(chairEllipsoid,chairCushion,c,[0,.550,.025],[.325,.059,.272],id,true);
+ // One slender, seamless upholstered back: no bulky second cushion or cord-like piping.
+ const back=chairPiece(chairBackGeo,chairCushion,c,[0,1.015,-.266],[.365,.436,.105],id,true);
+ back.rotation.x=-.085;
+ // Quiet, matching arm upholstery with metal supporting brackets.
+ for(const side of [-1,1]){
+  const arm=chairPiece(chairArmGeo,chairShell,c,[side*.316,.722,-.049],null,id,true);
+  arm.rotation.x=Math.PI/2;
+  const bracket=chairPiece(chairBraceGeo,chairLeg,c,[side*.318,.594,-.182],null,id);
+  bracket.rotation.z=side*.12;
+  for(const zLeg of [-.212,.225]){
+   const leg=chairPiece(chairLegGeo,chairLeg,c,[side*.247,.260,zLeg],null,id);
+   leg.rotation.z=-side*.075;leg.rotation.x=zLeg<0?-.042:.06;
+  }
+ }
+ return c;
+}
+function addTable(id,x,z,seats,type='main',round=true){const group=new THREE.Group();group.position.set(x,0,z);scene.add(group);const radius=seats>=6?.89:seats===4?.73:.57;
+ if(round){cyl(radius*.3,radius*.39,.72,black,0,.39,0,group);registerPick(cyl(radius,radius,.075,marble,0,.78,0,group,48),id);cyl(radius*.97,radius*.97,.015,gold,0,.738,0,group,48)}else{registerPick(box(seats>=6?2.3:1.3,.077,.92,marble,0,.78,0,group),id);box(.42,.72,.48,black,0,.39,0,group)}
+ lamp(0,0,group);const n=seats;for(let i=0;i<n;i++){const a=2*Math.PI*i/n;const d=round?radius+.52:seats>=6?1.25:.9;makeChair(Math.sin(a)*d,Math.cos(a)*d,a+Math.PI,group,id)}
+ // Surface halo selectable and status medallion.
+ const halo=new THREE.Mesh(new THREE.TorusGeometry(round?radius+.095:1.28,.028,9,48),new THREE.MeshBasicMaterial({color:0x9bd9b2,transparent:true,opacity:.72,depthWrite:false}));halo.rotation.x=Math.PI/2;halo.position.y=.83;if(!round)halo.scale.y=.65;group.add(halo);
+ // Pick the real table top and chair upholstery, not a floating oversized invisible cylinder.
+
+ tables.push({id,x,z,seats,type,group,halo,round});return group}
+// Individually modeled locations aligned to the photographic composition:
+// freestanding marble rounds in the foreground and center, banquettes to the rear/left,
+// and no tables occupying the bar at the right.
+addTable('T01',-8.0,6.0,4,'Front dining');addTable('T02',-3.6,5.6,4,'Front dining');addTable('T03',1.0,5.7,4,'Front dining');addTable('T04',5.4,5.8,4,'Near the bar');
+addTable('T05',-8.4,1.8,4,'Main dining');addTable('T06',-4.2,1.35,4,'Main dining');addTable('T07',.0,1.2,4,'Main dining');addTable('T08',4.55,1.35,4,'Near the bar');
+addTable('T09',-8.25,-2.5,2,'Intimate corner');addTable('T10',-4.1,-2.65,4,'Main dining');addTable('T11',.15,-2.6,4,'Main dining');addTable('T12',4.6,-2.4,2,'Near the bar');
+addTable('T13',-7.2,-6.9,4,'Banquette');addTable('T14',-2.65,-6.9,6,'Group dining',false);
+// Cinematic table selection: gentle warm spotlight and gradual restaurant-wide dimming.
+// Preserve normal lighting levels so deselection restores the original scene.
+const roomLights=[];
+scene.traverse(obj=>{if(obj.isLight)roomLights.push({light:obj,original:obj.intensity})});
+let sceneDim=1, glowStrength=0;
+const selectSpot=new THREE.SpotLight(0xffdfac,0,10,.74,1,1.5);
+selectSpot.visible=false;selectSpot.castShadow=true;
+selectSpot.shadow.mapSize.set(1024,1024);selectSpot.shadow.bias=-.0003;
+scene.add(selectSpot);scene.add(selectSpot.target);
+// Radial gradient texture fades continuously from warm centre to transparent edges.
+const glowCanvas=document.createElement('canvas');glowCanvas.width=256;glowCanvas.height=256;
+const glowCtx=glowCanvas.getContext('2d');const radial=glowCtx.createRadialGradient(128,128,4,128,128,128);
+radial.addColorStop(0,'rgba(255,223,156,.72)');radial.addColorStop(.22,'rgba(255,212,141,.42)');
+radial.addColorStop(.53,'rgba(255,195,121,.13)');radial.addColorStop(.82,'rgba(255,185,112,.025)');
+radial.addColorStop(1,'rgba(255,185,112,0)');
+glowCtx.fillStyle=radial;glowCtx.fillRect(0,0,256,256);
+const glowTexture=new THREE.CanvasTexture(glowCanvas);
+const softPool=new THREE.Mesh(new THREE.PlaneGeometry(5.8,5.8),new THREE.MeshBasicMaterial({map:glowTexture,transparent:true,opacity:0,depthWrite:false,polygonOffset:true,polygonOffsetFactor:-1,blending:THREE.AdditiveBlending}));
+softPool.rotation.x=-Math.PI/2;softPool.position.y=.023;softPool.visible=false;scene.add(softPool);
+// Subtle second bloom layer around the tabletop (not a visible light cone).
+const tableBloom=new THREE.Mesh(new THREE.PlaneGeometry(3.6,3.6),new THREE.MeshBasicMaterial({map:glowTexture,transparent:true,opacity:0,depthWrite:false,side:THREE.DoubleSide,blending:THREE.AdditiveBlending}));
+tableBloom.rotation.x=-Math.PI/2;tableBloom.visible=false;scene.add(tableBloom);
+function updateSpotlight(){
+ const t=tables.find(t=>t.id===selected);if(!t)return;
+ selectSpot.visible=softPool.visible=tableBloom.visible=true;
+ selectSpot.position.set(t.x,4.45,t.z);selectSpot.target.position.set(t.x,.65,t.z);selectSpot.target.updateMatrixWorld();
+ softPool.position.set(t.x,.027,t.z);tableBloom.position.set(t.x,.765,t.z);
+}
+function animateSelectionLighting(dt){
+ const active=!!selected,fade=1-Math.exp(-dt*3.2);
+ sceneDim+=( (active?.19:1)-sceneDim)*fade;
+ glowStrength+=((active?1:0)-glowStrength)*fade;
+ for(const entry of roomLights)entry.light.intensity=entry.original*sceneDim;
+ selectSpot.intensity=63*glowStrength;
+ softPool.material.opacity=.8*glowStrength;
+ tableBloom.material.opacity=.35*glowStrength;
+ if(!active&&glowStrength<.004){selectSpot.visible=false;softPool.visible=false;tableBloom.visible=false}
+}
+// Camera control: fixed eye-height walk and mouse/touch look.
+const keys=new Set(),mobileKeys=new Set();window.addEventListener('keydown',e=>{if(['INPUT','SELECT','TEXTAREA'].includes(document.activeElement.tagName))return;if(['w','a','s','d','ArrowUp','ArrowDown','ArrowLeft','ArrowRight'].includes(e.key)){keys.add(e.key.toLowerCase());e.preventDefault()}if(e.key==='Escape')hidePanel()});window.addEventListener('keyup',e=>keys.delete(e.key.toLowerCase()));window.addEventListener('blur',()=>keys.clear());
+for(const b of document.querySelectorAll('[data-move]')){const key=b.dataset.move;b.addEventListener('pointerdown',e=>{mobileKeys.add(key);b.setPointerCapture(e.pointerId)});for(const ev of ['pointerup','pointercancel','lostpointercapture'])b.addEventListener(ev,()=>mobileKeys.delete(key))}
+let dragging=false,lastX=0,lastY=0,travel=0,startX=0,startY=0;renderer.domElement.addEventListener('pointerdown',e=>{if(e.button!==0&&e.pointerType==='mouse')return;dragging=true;travel=0;lastX=startX=e.clientX;lastY=startY=e.clientY;renderer.domElement.setPointerCapture(e.pointerId)});renderer.domElement.addEventListener('pointermove',e=>{if(!dragging)return;const dx=e.clientX-lastX,dy=e.clientY-lastY;travel+=Math.abs(dx)+Math.abs(dy);if(travel>5){focusMotion=null;yaw-=dx*.0035;pitch=Math.max(-.65,Math.min(.52,pitch-dy*.0027))}lastX=e.clientX;lastY=e.clientY});renderer.domElement.addEventListener('pointerup',e=>{dragging=false;if(travel<10)pickTable(e.clientX,e.clientY)});renderer.domElement.addEventListener('pointercancel',()=>dragging=false);
+
+const raycaster=new THREE.Raycaster(),pointer=new THREE.Vector2();function pickTable(clientX,clientY){
+ const rect=renderer.domElement.getBoundingClientRect();pointer.set(((clientX-rect.left)/rect.width)*2-1,-((clientY-rect.top)/rect.height)*2+1);
+ raycaster.setFromCamera(pointer,camera);
+ // All meshes of a chair/table resolve to the same ID; nearest hit wins.
+ const hits=raycaster.intersectObjects(selectable,false);
+ if(hits.length){const id=hits[0].object.userData.table;if(id)openTable(id)}
+}
+const storageKey='gourmet-3d-bookings-v1';let bookings=[];try{bookings=JSON.parse(localStorage.getItem(storageKey)||'[]');if(!Array.isArray(bookings))bookings=[]}catch{}const save=()=>{try{localStorage.setItem(storageKey,JSON.stringify(bookings))}catch{}};
+const sameSlot=(a,b)=>a.date===b.date&&a.time===b.time&&a.table===b.table;const today=()=>{const now=new Date(),m=new Date(now.getTime()-now.getTimezoneOffset()*60000);return m.toISOString().slice(0,10)};const inputDate=document.getElementById('date');inputDate.min=today();inputDate.value=today();const $=id=>document.getElementById(id);
+const dateTimeOccupied=(id)=>bookings.some(b=>b.table===id&&b.date===inputDate.value&&b.time===$('time').value);function reflect(){for(const t of tables){const busy=dateTimeOccupied(t.id);const current=t.id===selected;t.halo.material.color.set(current?0xf3bf7e:busy?0xc8796a:0x9bd9b2);t.halo.material.opacity=current?1:.65}if(selected){const busy=dateTimeOccupied(selected);$('table-state').textContent=tr(busy?'occupied':'free');$('submit').disabled=busy;$('submit').textContent=tr(busy?'alreadyReserved':'reserve')}}
+// Optional, locally stored pre-order requests are attached to each booking.
+const preorderDishes=['coastal','table','mezze','sweet'];
+let preorderDraft={quantities:[0,0,0,0],notes:''};
+const preorderModal=$('preorder-modal');
+function updatePreorderSummary(){const count=preorderDraft.quantities.reduce((a,b)=>a+b,0);$('preorder-summary').textContent=count?tr('preorderAdded').replace('{count}',count):'';}
+function renderPreorderItems(){const names=tr('dishNames'),sub=tr('dishSub');$('preorder-items').innerHTML=preorderDishes.map((dish,i)=>`<div class="preorder-item"><div><strong>${escapeHtml(names[i])}</strong><small>${escapeHtml(sub[i])}</small></div><div class="preorder-qty"><button type="button" data-preorder="${i}" data-diff="-1" aria-label="${escapeHtml(names[i])} −">−</button><output aria-label="${escapeHtml(tr('preorderQty'))}">${preorderDraft.quantities[i]}</output><button type="button" data-preorder="${i}" data-diff="1" aria-label="${escapeHtml(names[i])} +">+</button></div></div>`).join('');$('preorder-items').querySelectorAll('[data-preorder]').forEach(button=>button.onclick=()=>{const i=Number(button.dataset.preorder);preorderDraft.quantities[i]=Math.max(0,Math.min(20,preorderDraft.quantities[i]+Number(button.dataset.diff)));renderPreorderItems()});}
+function closePreorder(){preorderModal.classList.remove('open');preorderModal.setAttribute('aria-hidden','true');$('preorder-open').focus();}
+$('preorder-open').onclick=()=>{renderPreorderItems();$('preorder-notes').value=preorderDraft.notes;preorderModal.classList.add('open');preorderModal.setAttribute('aria-hidden','false');$('preorder-close').focus();};
+$('preorder-close').onclick=closePreorder;
+preorderModal.addEventListener('click',e=>{if(e.target===preorderModal)closePreorder()});
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&preorderModal.classList.contains('open'))closePreorder()});
+$('preorder-save').onclick=()=>{preorderDraft.notes=$('preorder-notes').value.trim();updatePreorderSummary();closePreorder();};
+// Camera framing: gently fly toward the selected table without teleporting.
+// Eye-level camera gently approaches and faces the selected table.
+function focusOnTable(id){
+ const t=tables.find(v=>v.id===id);if(!t)return;
+  const point=new THREE.Vector3(t.x,.82,t.z);
+  const current=new THREE.Vector3(camera.position.x,0,camera.position.z);
+  let dir=new THREE.Vector3(t.x-current.x,0,t.z-current.z);
+  if(dir.lengthSq()<.01)dir.set(-Math.sin(yaw),0,-Math.cos(yaw));
+  dir.normalize();
+  const canStand=(x,z)=>x>-10.6&&x<8.3&&z>-9.2&&z<9.2&&!tables.some(o=>o.id!==id&&Math.hypot(x-o.x,z-o.z)<1.55)&&!(x>2.05&&x<11.65&&z<-4.6&&z>-7.1);
+  let destination=null;
+  for(const delta of [0,.48,-.48,.9,-.9,1.5,-1.5,Math.PI]){
+   const rotated=dir.clone().applyAxisAngle(new THREE.Vector3(0,1,0),delta);
+   for(const distance of [2.9,3.4,3.9,2.5]){
+    const x=t.x-rotated.x*distance,z=t.z-rotated.z*distance;
+    if(canStand(x,z)){destination=new THREE.Vector3(x,1.72,z);break}
+   }
+   if(destination)break;
+  }
+  if(!destination)destination=camera.position.clone();
+  const dx=point.x-destination.x,dz=point.z-destination.z;
+  focusMotion={mode:'eye',position:destination,yaw:Math.atan2(-dx,-dz),pitch:Math.atan2(point.y-1.72,Math.hypot(dx,dz))};
+}
+function animateCameraFocus(dt){
+ if(!focusMotion)return;
+ const k=1-Math.exp(-dt*3.8),f=focusMotion;
+ camera.position.lerp(f.position,k);
+ const delta=Math.atan2(Math.sin(f.yaw-yaw),Math.cos(f.yaw-yaw));yaw+=delta*k;pitch+=(f.pitch-pitch)*k;
+ if(camera.position.distanceTo(f.position)<.02&&Math.abs(delta)<.008&&Math.abs(f.pitch-pitch)<.008)focusMotion=null;
+}
+function openTable(id){
+ if(!tables.some(t=>t.id===id))return;
+ selected=id;focusOnTable(id);
+ const t=tables.find(t=>t.id===id);
+ $('table-title').textContent=tr('table')+' '+id.slice(1);
+ $('table-capacity').textContent=t.seats+' '+tr('guestsPlural');
+ $('table-location').textContent=tr('locations')[t.type]||t.type;
+ $('table-description').textContent=tr('descriptions')[t.type]||tr('descriptions').default;
+ $('party').innerHTML=Array.from({length:t.seats},(_,i)=>`<option value="${i+1}" ${i+1===Math.min(t.seats,2)?'selected':''}>${i+1} ${tr(i===0?'guest':'guestsPlural')}</option>`).join('');
+ $('side').classList.add('open');$('reservations').classList.remove('open');
+ $('selected-marker').textContent='✦ '+tr('table').toUpperCase()+' '+id.slice(1);
+ $('selected-marker').style.display='block';updateSpotlight();reflect();
+}
+// Step through the same table IDs used by selection, spotlight, camera and booking.
+function stepTable(direction){
+ if(!tables.length)return;
+ const current=tables.findIndex(t=>t.id===selected);
+ const next=(current+direction+tables.length)%tables.length;
+ openTable(tables[next].id);
+}
+$('table-prev').addEventListener('click',()=>stepTable(-1));
+$('table-next').addEventListener('click',()=>stepTable(1));
+function hidePanel(){$('side').classList.remove('open');selected=null;$('selected-marker').style.display='none';updateSpotlight();reflect()}$('close').onclick=hidePanel;for(const el of [inputDate,$('time')])el.addEventListener('change',reflect);
+$('reset').onclick=()=>{camera.position.set(-1.2,1.72,8.6);yaw=-.08;pitch=-.07;focusMotion=null;hidePanel()};$('choose').onclick=()=>{openTable('T01')};
+function toast(msg){$('toast').textContent=msg;$('toast').classList.add('show');setTimeout(()=>$('toast').classList.remove('show'),3500)};
+$('booking-form').addEventListener('submit',e=>{e.preventDefault();if(!selected)return;const date=inputDate.value,time=$('time').value;if(date<today()){toast(tr('future'));return}const booking={id:Math.random().toString(36).slice(2,10),table:selected,date,time,party:Number($('party').value),name:$('guest').value.trim(),email:$('email').value.trim(),preorder:{quantities:[...preorderDraft.quantities],notes:preorderDraft.notes}};if(dateTimeOccupied(selected)){reflect();return}bookings.push(booking);save();preorderDraft={quantities:[0,0,0,0],notes:''};updatePreorderSummary();hidePanel();updateCount();toast(tr('reservedToast').replace('{table}',booking.table.slice(1)).replace('{party}',booking.party).replace('{date}',date).replace('{time}',time))});
+function escapeHtml(value){return String(value).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+function updateCount(){
+ $('count').textContent=bookings.length;
+ $('booking-list').innerHTML=bookings.length?bookings.map(b=>`<div class="booking"><b>${tr('table')} ${escapeHtml(b.table.slice(1))} · ${b.party} ${tr('guestsPlural')}</b><small>${escapeHtml(b.date)} ${tr('at')} ${escapeHtml(b.time)} · ${escapeHtml(b.name)}</small>${b.preorder&&Array.isArray(b.preorder.quantities)&&b.preorder.quantities.some(n=>n>0)?`<small>${tr('preorderLabel')}: ${b.preorder.quantities.map((n,i)=>n>0?escapeHtml(tr('dishNames')[i])+' ×'+Number(n):'').filter(Boolean).join(', ')}</small>`:''}${b.preorder?.notes?`<small>${escapeHtml(b.preorder.notes)}</small>`:''}<button data-cancel="${escapeHtml(b.id)}">${tr('cancel')}</button></div>`).join(''):'<p style="color:#c1b3a4;font-size:12px">'+tr('none')+'</p>';
+ document.querySelectorAll('[data-cancel]').forEach(b=>b.onclick=()=>{bookings=bookings.filter(x=>x.id!==b.dataset.cancel);save();updateCount();reflect();toast(tr('cancelled'))});
+}
+$('mine').onclick=()=>{$('reservations').classList.toggle('open');$('side').classList.remove('open')};$('close-mine').onclick=()=>$('reservations').classList.remove('open');updateCount();reflect();
+const clock=new THREE.Clock();function animate(){requestAnimationFrame(animate);const dt=Math.min(clock.getDelta(),.05);animateSelectionLighting(dt);animateCameraFocus(dt);const forward=Number(keys.has('w')||keys.has('arrowup')||mobileKeys.has('forward'))-Number(keys.has('s')||keys.has('arrowdown')||mobileKeys.has('backward'));const side=Number(keys.has('d')||mobileKeys.has('right'))-Number(keys.has('a')||mobileKeys.has('left'));const magnitude=Math.hypot(forward,side)||1;const speed=3.5*dt/magnitude;const nx=camera.position.x+(-Math.sin(yaw)*forward+Math.cos(yaw)*side)*speed,nz=camera.position.z+(-Math.cos(yaw)*forward+Math.sin(yaw)*side)*speed;
+ // keep visitor within room and out of furniture footprints
+ const collide=(x,z)=>tables.some(t=>Math.hypot(x-t.x,z-t.z)<(t.seats>=6?1.65:1.28))||(x>2.05&&x<11.65&&z<-4.6&&z>-7.1);
+ if(!focusMotion){if(nx>-10.65&&nx<8.4&&!collide(nx,camera.position.z))camera.position.x=nx;if(nz>-9.3&&nz<9.3&&!collide(camera.position.x,nz))camera.position.z=nz;}
+ camera.position.y=1.72;camera.rotation.order='YXZ';camera.rotation.y=yaw;camera.rotation.x=pitch;
+ if(selected){const t=tables.find(v=>v.id===selected),marker=$('selected-marker');if(t){const cam=camera;const projected=new THREE.Vector3(t.x,1.38,t.z).project(cam);marker.style.display=projected.z<1&&projected.z>-1?'block':'none';marker.style.left=((projected.x+1)*.5*innerWidth)+'px';marker.style.top=((-projected.y+1)*.5*innerHeight)+'px';}}
+ renderer.render(scene,camera)}animate();window.addEventListener('resize',()=>{camera.aspect=innerWidth/innerHeight;camera.updateProjectionMatrix();renderer.setSize(innerWidth,innerHeight)});setTimeout(()=>loading.classList.add('hide'),600);
+</script></body></html>
