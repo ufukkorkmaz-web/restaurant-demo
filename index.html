@@ -208,6 +208,27 @@
     .js .reveal.in{opacity:1;transform:none}
     @media(max-width:700px){.pillars{grid-template-columns:1fr;margin-top:44px}.marquee-track span{font-size:23px}.marquee-track i{margin:0 20px}.intro{padding-top:100px}.orb-a{left:20%}}
     @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*:before,*:after{transition:none!important;animation:none!important}.js .reveal{opacity:1!important;transform:none!important}.js .reveal-clip .story-image{clip-path:none!important;opacity:1!important;transform:none!important}}
+
+    /* pre-order teaser */
+    .preorder-teaser{position:relative;display:flex;align-items:center;gap:28px;max-width:1200px;margin:48px auto 0;padding:30px 34px;border-radius:32px;background:linear-gradient(135deg,#fffdf7,#f6ecd7);border:1px solid #eadcc0;box-shadow:inset 0 2px 2px #fff,0 18px 38px #8a6a3a1c;overflow:hidden}
+    .preorder-teaser:before{content:"";position:absolute;width:260px;height:260px;border-radius:50%;right:-80px;top:-120px;background:radial-gradient(circle,#f5c98655,transparent 70%);pointer-events:none}
+    .preorder-teaser>*{position:relative}
+    .preorder-teaser-icon{flex:none;display:grid;place-items:center;width:68px;height:68px;border-radius:50%;background:linear-gradient(145deg,#f7c47c,#d9722f);color:#2b1c0e;box-shadow:inset 0 2px 2px #fff8,0 10px 22px #b9631b40}
+    .preorder-teaser-icon svg{width:28px;height:28px}
+    .preorder-teaser-copy{flex:1;min-width:0}
+    .preorder-teaser h3{margin:10px 0 8px;font-size:clamp(25px,2.6vw,34px);font-weight:500;letter-spacing:-.035em;line-height:1.2}
+    .preorder-teaser p{margin:0;max-width:560px;color:#7a7a6c;font-size:14px;line-height:1.7}
+    @media(max-width:860px){.preorder-teaser{flex-direction:column;align-items:flex-start;gap:20px;padding:28px 24px}.preorder-teaser .primary-btn{align-self:stretch}}
+
+    /* ===== Curved section dividers ===== */
+    :root{--wave-h:clamp(52px,7.5vw,118px)}
+    .wave{position:absolute;left:0;width:100%;height:var(--wave-h);pointer-events:none;line-height:0;z-index:1}
+    .wave svg{display:block;width:100%;height:100%}
+    .wave-bottom{bottom:-1px}.wave-top{top:-1px}
+    .wave-paper{color:#faf8f1}.wave-story{color:#eeeae0}
+    .intro{padding-bottom:calc(var(--wave-h) + 70px)}
+    .story{position:relative;padding-top:calc(var(--wave-h) + 50px)}
+    .visit{position:relative;padding-top:calc(var(--wave-h) + 40px)}
   </style>
 
 
@@ -267,6 +288,7 @@
       <div class="pillar"><span class="pillar-icon"><i data-lucide="users"></i></span><h3 data-i18n="pil2.t">Made to share</h3><p data-i18n="pil2.d">Plates that travel across the table and bring everyone closer.</p></div>
       <div class="pillar"><span class="pillar-icon"><i data-lucide="heart"></i></span><h3 data-i18n="pil3.t">Warm hospitality</h3><p data-i18n="pil3.d">Arrive as a guest, leave feeling like family.</p></div>
      </div>
+         <div class="wave wave-bottom wave-paper" aria-hidden="true"><svg viewBox="0 0 1440 120" preserveAspectRatio="none" focusable="false"><path fill="currentColor" opacity=".45" d="M0,38 C220,110 470,8 720,52 C980,98 1220,118 1440,48 L1440,120 L0,120 Z"/><path fill="currentColor" d="M0,76 C200,26 440,22 700,70 C960,118 1210,96 1440,56 L1440,120 L0,120 Z"/></svg></div>
     </section>
     <section id="menu" class="menu-section canva-section" aria-labelledby="menu-title">
      <div class="section-heading">
@@ -280,8 +302,18 @@
       <button id="tab-sweet" class="tab canva-button" type="button" role="tab" aria-selected="false" aria-controls="menu-items" data-category="sweet" data-i18n="tab.sweet">Something Sweet</button>
      </div>
      <div id="menu-items" class="menu-grid" role="tabpanel" aria-labelledby="tab-signatures"></div>
+     <aside class="preorder-teaser" aria-labelledby="preorder-teaser-title">
+      <span class="preorder-teaser-icon" aria-hidden="true"><i data-lucide="concierge-bell"></i></span>
+      <div class="preorder-teaser-copy">
+       <span class="eyebrow canva-text" data-i18n="pre.eyebrow">A thoughtful touch</span>
+       <h3 id="preorder-teaser-title" data-i18n-html="pre.title">Your favorites, <em>ready when you arrive.</em></h3>
+       <p class="canva-text" data-i18n="pre.copy">Pick your table in 3D, then choose the dishes you'd like prepared in advance and add any dietary notes.</p>
+      </div>
+      <a class="primary-btn canva-button" href="3d-room.html" data-room-link="true"><span data-i18n="pre.btn">Reserve &amp; pre-order</span> <i data-lucide="arrow-up-right"></i></a>
+     </aside>
     </section>
     <section id="experience" class="story canva-section" aria-labelledby="story-title">
+     <div class="wave wave-top wave-paper" aria-hidden="true"><svg viewBox="0 0 1440 120" preserveAspectRatio="none" focusable="false"><path fill="currentColor" d="M0,0 L1440,0 L1440,46 C1200,112 960,100 720,58 C470,14 220,12 0,70 Z"/></svg></div>
      <div class="story-image-wrap reveal-clip">
       <img id="story-image" class="story-image canva-image" src="https://images.pexels.com/photos/39558540/pexels-photo-39558540.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=1100" referrerpolicy="no-referrer" alt="A warm and inviting restaurant interior with sunlight streaming through the windows, highlighting the elegant table setup." data-i18n-alt="story.alt" loading="lazy">
      </div>
@@ -293,6 +325,7 @@
      </div>
     </section>
     <section id="visit" class="visit canva-section" aria-labelledby="visit-title">
+     <div class="wave wave-top wave-story" aria-hidden="true"><svg viewBox="0 0 1440 120" preserveAspectRatio="none" focusable="false"><path fill="currentColor" d="M0,0 L1440,0 L1440,68 C1210,16 960,14 720,60 C470,106 220,112 0,52 Z"/></svg></div>
      <div class="visit-panel canva-panel">
       <span class="eyebrow canva-text" data-i18n="visit.eyebrow">Your table is waiting</span>
       <h2 id="visit-title" data-i18n-html="visit.title">Let's make a <em>moment</em> of it.</h2>
@@ -348,6 +381,7 @@
         'pil1.t':'Honest ingredients','pil1.d':'Simple, seasonal produce, treated with respect.',
         'pil2.t':'Made to share','pil2.d':'Plates that travel across the table and bring everyone closer.',
         'pil3.t':'Warm hospitality','pil3.d':'Arrive as a guest, leave feeling like family.',
+        'pre.eyebrow':'A thoughtful touch','pre.title':'Your favorites, <em>ready when you arrive.</em>','pre.copy':'Pick your table in 3D, then choose the dishes you\'d like prepared in advance and add any dietary notes.','pre.btn':'Reserve & pre-order',
         dishes:{
           coastal:{name:'Coastal Octopus',desc:'Tender grilled octopus, citrus, herbs & a drizzle of golden olive oil.',alt:'Delicious grilled octopus served elegantly on a textured white plate.'},
           table:{name:'Mediterranean Table',desc:'An abundant spread of vibrant favorites, made for sharing.',alt:'A vibrant Mediterranean feast with mixed dishes, perfect for dining or celebrations.'},
@@ -385,6 +419,7 @@
         'pil1.t':'Dürüst malzeme','pil1.d':'Sade, mevsiminde ürünler; hak ettiği saygıyla işlenir.',
         'pil2.t':'Paylaşmak için','pil2.d':'Sofrada elden ele dolaşan, herkesi birbirine yaklaştıran tabaklar.',
         'pil3.t':'Sıcak bir ağırlama','pil3.d':'Misafir olarak gelin, evinizdeymiş gibi hissederek ayrılın.',
+        'pre.eyebrow':'İnce bir dokunuş','pre.title':'Sevdiğiniz lezzetler, <em>siz gelince hazır.</em>','pre.copy':'Masanızı 3D olarak seçin, ardından önceden hazırlanmasını istediğiniz yemekleri ve alerji notlarınızı ekleyin.','pre.btn':'Rezerve et ve ön sipariş ver',
         dishes:{
           coastal:{name:'Közde Ahtapot',desc:'Közlenmiş yumuşacık ahtapot; narenciye, taze otlar ve üzerinde altın sarısı zeytinyağı.',alt:'Dokulu beyaz bir tabakta şık biçimde servis edilen lezzetli közlenmiş ahtapot.'},
           table:{name:'Akdeniz Sofrası',desc:'Paylaşmak için hazırlanmış, canlı lezzetlerle dolu bereketli bir sofra.',alt:'Karışık yemeklerle donatılmış, davetler ve kutlamalar için ideal capcanlı bir Akdeniz sofrası.'},
@@ -422,6 +457,7 @@
         'pil1.t':'Ehrliche Zutaten','pil1.d':'Einfache, saisonale Produkte, mit Respekt behandelt.',
         'pil2.t':'Zum Teilen gemacht','pil2.d':'Teller, die über den Tisch wandern und alle näher zusammenbringen.',
         'pil3.t':'Herzliche Gastfreundschaft','pil3.d':'Als Gast kommen, mit dem Gefühl von Familie gehen.',
+        'pre.eyebrow':'Ein besonderes Detail','pre.title':'Ihre Favoriten, <em>bereit zu Ihrer Ankunft.</em>','pre.copy':'Wählen Sie Ihren Tisch in 3D und bestimmen Sie dann Gerichte, die vorab zubereitet werden – samt Hinweisen zu Allergien.','pre.btn':'Reservieren & vorbestellen',
         dishes:{
           coastal:{name:'Oktopus von der Küste',desc:'Zarter gegrillter Oktopus mit Zitrusfrüchten, Kräutern und einem Schuss goldenem Olivenöl.',alt:'Köstlicher gegrillter Oktopus, elegant auf einem strukturierten weißen Teller angerichtet.'},
           table:{name:'Mittelmeer-Tafel',desc:'Eine üppige Auswahl lebendiger Lieblingsgerichte, gemacht zum Teilen.',alt:'Ein farbenfrohes Mittelmeer-Festmahl mit gemischten Gerichten, ideal für Feiern.'},
@@ -612,7 +648,7 @@
           }
         });
       }, { threshold:.14, rootMargin:'0px 0px -8% 0px' });
-      document.querySelectorAll('.intro .eyebrow,.intro h2,.intro > p,.pillar,.section-heading > *,.tabs,.story-copy > *,.visit-panel > *').forEach(el => {
+      document.querySelectorAll('.intro .eyebrow,.intro h2,.intro > p,.pillar,.section-heading > *,.tabs,.preorder-teaser,.story-copy > *,.visit-panel > *').forEach(el => {
         const idx = [...el.parentElement.children].filter(c => !c.matches('.orb')).indexOf(el);
         el.style.setProperty('--d', (Math.min(idx, 4) * 0.12).toFixed(2) + 's');
         el.classList.add('reveal');
