@@ -149,6 +149,7 @@
 
     /* ===== 3D dining room call-to-action: the star of the page ===== */
     .hero-break{flex-basis:100%;height:0}
+    .hero-break+.cta-3d{margin-top:14px}
     .cta-3d{position:relative;display:inline-flex;align-items:center;gap:16px;padding:14px 26px 14px 14px;border-radius:100px;color:#1c2a1f;text-decoration:none;background:linear-gradient(135deg,#fae3b8 0%,#f0b255 55%,#dd8a2e 100%);border:1px solid #fff3d6;box-shadow:inset 0 2px 2px #fffc,inset 0 -4px 8px #b9631b55,0 18px 38px #c9782a66,0 0 0 0 #f0b25588;animation:cta3dPulse 3s ease-out infinite;transition:transform .25s,box-shadow .25s}
     .cta-3d:hover{transform:translateY(-4px) scale(1.02);box-shadow:inset 0 2px 2px #fffc,inset 0 -4px 8px #b9631b55,0 24px 48px #c9782a88,0 0 0 6px #f0b25544;animation-play-state:paused}
     .cta-3d:active{transform:translateY(-1px) scale(.99)}
@@ -244,9 +245,10 @@
       <span class="eyebrow canva-text" data-i18n="hero.eyebrow">A little taste of the coast</span>
       <h1 id="hero-title" data-i18n-html="hero.title">Savor the <em>sunshine.</em></h1>
       <p class="hero-copy canva-text" data-i18n="hero.copy">An invitation to slow down, gather close, and discover the vibrant flavors of the Mediterranean—one beautiful plate at a time.</p>
-      <div class="hero-actions"><a class="cta-3d canva-button" href="3d-room.html" data-room-link="true"><span class="cta-3d-badge" data-i18n="3d.badge">Live 3D</span><span class="cta-3d-shine" aria-hidden="true"></span><span class="cta-3d-icon"><span class="cube" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i></span></span><span class="cta-3d-text"><strong data-i18n="3d.hero">Explore our 3D Dining Room</strong><small data-i18n="3d.sub">Walk in and pick your table</small></span><span class="cta-3d-arrow" aria-hidden="true">↗</span></a><span class="hero-break" aria-hidden="true"></span>
+      <div class="hero-actions">
        <a class="primary-btn canva-button" href="#menu"><span data-i18n="hero.btn1">Explore the Menu</span> <i data-lucide="arrow-up-right"></i></a>
        <a class="outline-btn canva-button" href="#about"><span data-i18n="hero.btn2">Our Story</span> <i data-lucide="arrow-right"></i></a>
+       <span class="hero-break" aria-hidden="true"></span><a class="cta-3d canva-button" href="3d-room.html" data-room-link="true"><span class="cta-3d-badge" data-i18n="3d.badge">Live 3D</span><span class="cta-3d-shine" aria-hidden="true"></span><span class="cta-3d-icon"><span class="cube" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i></span></span><span class="cta-3d-text"><strong data-i18n="3d.hero">Explore our 3D Dining Room</strong><small data-i18n="3d.sub">Walk in and pick your table</small></span><span class="cta-3d-arrow" aria-hidden="true">↗</span></a>
       </div>
      </div>
      <div class="hero-visual">
