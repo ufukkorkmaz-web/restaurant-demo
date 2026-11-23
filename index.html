@@ -70,10 +70,6 @@
     .hero-photo-wrap{position:relative;width:min(570px,91%);aspect-ratio:1/1;border-radius:50%;padding:14px;background:linear-gradient(145deg,#ffffffbb,#b48a5c77);box-shadow:inset 4px 5px 8px #fff9,0 35px 65px #634c3f55,0 0 0 1px #fff9;transform:rotate(5deg)}
     .hero-photo-wrap:before{content:"";position:absolute;inset:5px;border:1px solid #fff9;border-radius:50%;pointer-events:none;z-index:2}
     .hero-photo{display:block;width:100%;height:100%;object-fit:cover;border-radius:50%;box-shadow:inset 0 0 15px #0005}
-    .floating-note{position:absolute;z-index:3;left:-2%;bottom:12%;display:flex;align-items:center;gap:12px;padding:14px 20px 14px 14px;border-radius:100px;background:#fffdf2c9;backdrop-filter:blur(17px);border:1px solid #fff;box-shadow:inset 0 2px 2px #fff,0 16px 35px #59462d3b;transform:rotate(-5deg)}
-    .note-icon{display:grid;place-items:center;width:42px;height:42px;border-radius:50%;background:#e8c6a0;color:#754c2e;box-shadow:inset 0 2px 3px #fff9}
-    .note-icon svg{width:18px;height:18px}
-    .floating-note strong{display:block;font-size:12px}.floating-note small{display:block;color:#7d796e;font-size:10px;margin-top:3px}
     .intro{position:relative;background:#273d2b;color:#fff;padding:85px 8%;text-align:center;overflow:hidden}
     .intro:before,.intro:after{content:"";position:absolute;width:330px;height:330px;border:1px solid #ffffff18;border-radius:50%}
     .intro:before{left:-130px;top:-190px;box-shadow:0 0 0 45px #ffffff07,0 0 0 95px #ffffff05}
@@ -99,8 +95,8 @@
     .visit-panel>*{position:relative;z-index:1}.visit .eyebrow{color:#e0b887}.visit h2{font-size:clamp(42px,5vw,68px);font-weight:500;letter-spacing:-.045em;margin:18px 0 15px}.visit p{color:#d3ddcf;line-height:1.7;font-size:14px;margin:0 auto 28px;max-width:520px}.visit .primary-btn{background:linear-gradient(145deg,#f4c88e,#d69253);color:#273a2a;border-color:#f5d7aa;box-shadow:inset 0 2px 2px #fff7,0 12px 20px #14281788}
     footer{background:#f9f6ef;padding:0 7% 30px}.footer-inner{max-width:1200px;margin:auto;border-top:1px solid #e1dfd5;padding-top:28px;display:flex;align-items:center;justify-content:space-between;gap:15px}.footer-inner .brand{font-size:26px}.footer-inner p{font-size:12px;color:#858a7e;margin:0}.footer-links{display:flex;gap:22px;font-size:12px;font-weight:700}.footer-links a:hover{color:#a67749}
     @media(max-width:1000px){.hero{padding-left:6%;min-height:600px}.hero:before{width:590px;height:590px}.hero-visual{min-height:500px}.dish-image{height:200px}.story{gap:6%;padding:90px 7%}.story-image{height:440px}.nav-links{gap:26px}}
-    @media(max-width:700px){.topbar{padding:20px 6%}.brand{font-size:29px}.top-actions{margin-left:auto}.mobile-toggle{display:flex}.nav-links{display:none;position:absolute;top:73px;left:5%;right:5%;padding:18px;border-radius:22px;background:#fffdf5ee;backdrop-filter:blur(15px);box-shadow:0 15px 35px #283c2d2b;flex-direction:column;align-items:stretch;gap:0}.nav-links.open{display:flex}.nav-links a{padding:13px}.nav-links .nav-cta{margin-top:8px;text-align:center}.hero{display:flex;flex-direction:column;padding:45px 6% 55px;min-height:0}.hero-content{text-align:center}.hero-content .eyebrow{justify-content:center}.hero-copy{margin-left:auto;margin-right:auto}.hero-actions{justify-content:center}h1{font-size:clamp(61px,13vw,88px);margin:20px 0}.hero-visual{width:100%;min-height:0;margin-top:35px}.hero:before{width:550px;height:550px;top:auto;bottom:-50px;right:-210px}.hero-photo-wrap{width:min(450px,86%)}.floating-note{left:0;bottom:4%}.intro{padding:75px 7%}.menu-section{padding:80px 6%}.menu-grid{grid-template-columns:1fr;max-width:450px}.dish-image{height:240px}.story{grid-template-columns:1fr;padding:85px 8%;gap:55px}.story-image{height:430px}.story-copy{max-width:none}.visit{padding:75px 5%}.visit-panel{padding:65px 22px}.footer-inner{flex-direction:column;text-align:center}.footer-links{justify-content:center}}
-    @media(max-width:420px){.hero-photo-wrap{width:93%}.floating-note{transform:scale(.84) rotate(-5deg);transform-origin:left bottom}.hero-actions{gap:10px}.primary-btn,.outline-btn{padding:16px 20px}.dish-image{height:210px}}
+    @media(max-width:700px){.topbar{padding:20px 6%}.brand{font-size:29px}.top-actions{margin-left:auto}.mobile-toggle{display:flex}.nav-links{display:none;position:absolute;top:73px;left:5%;right:5%;padding:18px;border-radius:22px;background:#fffdf5ee;backdrop-filter:blur(15px);box-shadow:0 15px 35px #283c2d2b;flex-direction:column;align-items:stretch;gap:0}.nav-links.open{display:flex}.nav-links a{padding:13px}.nav-links .nav-cta{margin-top:8px;text-align:center}.hero{display:flex;flex-direction:column;padding:45px 6% 55px;min-height:0}.hero-content{text-align:center}.hero-content .eyebrow{justify-content:center}.hero-copy{margin-left:auto;margin-right:auto}.hero-actions{justify-content:center}h1{font-size:clamp(61px,13vw,88px);margin:20px 0}.hero-visual{width:100%;min-height:0;margin-top:35px}.hero:before{width:550px;height:550px;top:auto;bottom:-50px;right:-210px}.hero-photo-wrap{width:min(450px,86%)}.intro{padding:75px 7%}.menu-section{padding:80px 6%}.menu-grid{grid-template-columns:1fr;max-width:450px}.dish-image{height:240px}.story{grid-template-columns:1fr;padding:85px 8%;gap:55px}.story-image{height:430px}.story-copy{max-width:none}.visit{padding:75px 5%}.visit-panel{padding:65px 22px}.footer-inner{flex-direction:column;text-align:center}.footer-links{justify-content:center}}
+    @media(max-width:420px){.hero-photo-wrap{width:93%}.hero-actions{gap:10px}.primary-btn,.outline-btn{padding:16px 20px}.dish-image{height:210px}}
     /* ===== Livelier layer: richer color, motion, texture ===== */
     :root{--terra:#cf5a26;--saffron:#eba23d}
     #about,#menu,#experience,#visit{scroll-margin-top:56px}
@@ -135,7 +131,6 @@
     .hero-content>:nth-child(1){animation-delay:.05s}.hero-content>:nth-child(2){animation-delay:.18s}.hero-content>:nth-child(3){animation-delay:.34s}.hero-content>:nth-child(4){animation-delay:.5s}
     .hero-visual{translate:var(--px,0px) var(--py,0px);transition:translate .4s ease-out}
     .hero-photo-wrap{animation:floaty 9s ease-in-out infinite}
-    .floating-note{animation:bob 6s ease-in-out infinite}
     .orb{position:absolute;z-index:-1;border-radius:50%;filter:blur(46px);pointer-events:none;translate:calc(var(--px,0px) * -1.6) calc(var(--py,0px) * -1.6);animation:drift 14s ease-in-out infinite}
     .orb-a{width:260px;height:260px;left:36%;bottom:4%;background:#e07a3c55}
     .orb-b{width:220px;height:220px;left:-60px;bottom:18%;background:#8aa86b55;animation-duration:18s;animation-delay:-5s}
@@ -151,6 +146,38 @@
     .marquee-track span{font-family:"Playfair Display",serif;font-style:italic;font-size:30px;font-weight:500;color:#fff4e0;white-space:nowrap}
     .marquee-track i{font-style:normal;font-size:18px;color:#ffd596;margin:0 30px}
     .intro{padding-top:120px}
+
+    /* ===== 3D dining room call-to-action: the star of the page ===== */
+    .hero-break{flex-basis:100%;height:0}
+    .cta-3d{position:relative;display:inline-flex;align-items:center;gap:16px;padding:14px 26px 14px 14px;border-radius:100px;color:#1c2a1f;text-decoration:none;background:linear-gradient(135deg,#fae3b8 0%,#f0b255 55%,#dd8a2e 100%);border:1px solid #fff3d6;box-shadow:inset 0 2px 2px #fffc,inset 0 -4px 8px #b9631b55,0 18px 38px #c9782a66,0 0 0 0 #f0b25588;animation:cta3dPulse 3s ease-out infinite;transition:transform .25s,box-shadow .25s}
+    .cta-3d:hover{transform:translateY(-4px) scale(1.02);box-shadow:inset 0 2px 2px #fffc,inset 0 -4px 8px #b9631b55,0 24px 48px #c9782a88,0 0 0 6px #f0b25544;animation-play-state:paused}
+    .cta-3d:active{transform:translateY(-1px) scale(.99)}
+    .cta-3d:focus-visible{outline:3px solid #273d2b;outline-offset:4px}
+    .cta-3d-shine{position:absolute;inset:0;border-radius:inherit;overflow:hidden;pointer-events:none}
+    .cta-3d-shine:after{content:"";position:absolute;top:-10%;bottom:-10%;left:-70%;width:45%;background:linear-gradient(100deg,transparent,#ffffffb0,transparent);transform:skewX(-22deg);animation:cta3dShine 5s ease-in-out 1.2s infinite}
+    .cta-3d-badge{position:absolute;top:-11px;right:22px;z-index:2;padding:5px 11px;border-radius:99px;background:#273d2b;color:#f6cf8f;font-size:9.5px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;box-shadow:0 6px 14px #1a2c1d55;border:1px solid #f6cf8f55}
+    .cta-3d-icon{position:relative;z-index:1;flex:none;display:grid;place-items:center;width:58px;height:58px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#3a573f,#1d3022);box-shadow:inset 0 2px 3px #ffffff40,0 6px 14px #1a2c1d55;perspective:200px}
+    .cta-3d-text{position:relative;z-index:1;display:flex;flex-direction:column;text-align:left;line-height:1.2}
+    .cta-3d-text strong{font-size:16px;font-weight:700;letter-spacing:-.01em}
+    .cta-3d-text small{margin-top:4px;font-size:11.5px;font-weight:500;color:#4d3a1c}
+    .cta-3d-arrow{position:relative;z-index:1;font-size:19px;font-weight:700;margin-left:4px;transition:transform .25s}
+    .cta-3d:hover .cta-3d-arrow{transform:translate(4px,-4px)}
+    .cube{position:relative;display:block;width:22px;height:22px;transform-style:preserve-3d;animation:cubeSpin 9s linear infinite}
+    .cube i{position:absolute;inset:0;border:1.6px solid #f6cf8f;background:#f6cf8f26;box-shadow:0 0 6px #f6cf8f55}
+    .cube i:nth-child(1){transform:translateZ(11px)}.cube i:nth-child(2){transform:rotateY(180deg) translateZ(11px)}.cube i:nth-child(3){transform:rotateY(90deg) translateZ(11px)}.cube i:nth-child(4){transform:rotateY(-90deg) translateZ(11px)}.cube i:nth-child(5){transform:rotateX(90deg) translateZ(11px)}.cube i:nth-child(6){transform:rotateX(-90deg) translateZ(11px)}
+    .cta-3d:hover .cube{animation-duration:2.4s}
+    .cube-sm{width:14px;height:14px}.cube-sm i{border-width:1.3px}.cube-sm i:nth-child(1){transform:translateZ(7px)}.cube-sm i:nth-child(2){transform:rotateY(180deg) translateZ(7px)}.cube-sm i:nth-child(3){transform:rotateY(90deg) translateZ(7px)}.cube-sm i:nth-child(4){transform:rotateY(-90deg) translateZ(7px)}.cube-sm i:nth-child(5){transform:rotateX(90deg) translateZ(7px)}.cube-sm i:nth-child(6){transform:rotateX(-90deg) translateZ(7px)}
+    .nav-cta.nav-3d{gap:10px;background:linear-gradient(135deg,#fae3b8,#f0b255 70%,#dd8a2e);color:#1c2a1f;border:1px solid #fff3d6;box-shadow:inset 0 2px 2px #fffc,0 8px 20px #c9782a55}
+    .nav-cta.nav-3d .cube{margin-right:4px;margin-left:2px}.nav-cta.nav-3d .cube i{border-color:#273d2b;background:#273d2b1f;box-shadow:none}
+    @keyframes cubeSpin{from{transform:rotateX(-24deg) rotateY(0)}to{transform:rotateX(-24deg) rotateY(360deg)}}
+    @keyframes cta3dPulse{0%{box-shadow:inset 0 2px 2px #fffc,inset 0 -4px 8px #b9631b55,0 18px 38px #c9782a66,0 0 0 0 #f0b255aa}70%,100%{box-shadow:inset 0 2px 2px #fffc,inset 0 -4px 8px #b9631b55,0 18px 38px #c9782a66,0 0 0 22px #f0b25500}}
+    @keyframes cta3dShine{0%,55%{left:-70%}100%{left:140%}}
+    @media(max-width:700px){.cta-3d{width:min(100%,380px);justify-content:center;padding-right:20px}.cta-3d-text strong{font-size:15px}}
+    @media(max-width:420px){.cta-3d{gap:12px;padding:12px 16px 12px 12px}.cta-3d-icon{width:50px;height:50px}.cta-3d-text strong{font-size:14px}.cta-3d-text small{font-size:10.5px}.cta-3d-arrow{display:none}}
+    /* ribbon sits closer to the hero plate so it is visible without scrolling */
+    .marquee{margin:-86px 0 -26px}
+    @media(max-width:1000px){.marquee{margin-top:-116px}}
+    @media(max-width:700px){.marquee{margin-top:-26px}}
     /* pillars */
     .pillars{position:relative;z-index:1;display:grid;grid-template-columns:repeat(3,1fr);gap:20px;max-width:1000px;margin:58px auto 0;text-align:left}
     .pillar{padding:30px 28px;border-radius:26px;background:linear-gradient(160deg,#ffffff14,#ffffff06);border:1px solid #ffffff1f;backdrop-filter:blur(6px);transition:transform .4s cubic-bezier(.2,.7,.2,1),background .4s,border-color .4s}
@@ -179,7 +206,6 @@
     .js .reveal{opacity:0;transform:translateY(34px);transition:opacity .9s cubic-bezier(.2,.7,.2,1),transform .9s cubic-bezier(.2,.7,.2,1);transition-delay:var(--d,0s)}
     .js .reveal.in{opacity:1;transform:none}
     @media(max-width:700px){.pillars{grid-template-columns:1fr;margin-top:44px}.marquee-track span{font-size:23px}.marquee-track i{margin:0 20px}.intro{padding-top:100px}.orb-a{left:20%}}
-    @media(max-width:420px){.floating-note{animation:none}}
     @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*:before,*:after{transition:none!important;animation:none!important}.js .reveal{opacity:1!important;transform:none!important}.js .reveal-clip .story-image{clip-path:none!important;opacity:1!important;transform:none!important}}
   </style>
 
@@ -195,7 +221,7 @@
      <a class="canva-link" href="#about" data-i18n="nav.story">Our Story</a>
      <a class="canva-link" href="#menu" data-i18n="nav.menu">Menu</a>
      <a class="canva-link" href="#experience" data-i18n="nav.experience">Experience</a>
-     <a class="nav-cta canva-button" href="3d-room.html" data-room-link="true" style="background:#b98d61;color:#172016"><span data-i18n="3d.nav">Explore 3D Tables</span> ↗</a><a class="nav-cta canva-button" href="tel:+12125550184"><span data-i18n="cta.call">Call to Reserve</span> <i data-lucide="arrow-up-right" style="width:15px;height:15px"></i></a>
+     <a class="nav-cta nav-3d canva-button" href="3d-room.html" data-room-link="true"><span class="cube cube-sm" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i></span><span data-i18n="3d.nav">Explore 3D Tables</span> ↗</a><a class="nav-cta canva-button" href="tel:+12125550184"><span data-i18n="cta.call">Call to Reserve</span> <i data-lucide="arrow-up-right" style="width:15px;height:15px"></i></a>
     </nav>
     <div class="top-actions">
      <div class="lang" id="lang">
@@ -218,7 +244,7 @@
       <span class="eyebrow canva-text" data-i18n="hero.eyebrow">A little taste of the coast</span>
       <h1 id="hero-title" data-i18n-html="hero.title">Savor the <em>sunshine.</em></h1>
       <p class="hero-copy canva-text" data-i18n="hero.copy">An invitation to slow down, gather close, and discover the vibrant flavors of the Mediterranean—one beautiful plate at a time.</p>
-      <div class="hero-actions"><a class="primary-btn canva-button" href="3d-room.html" data-room-link="true"><span data-i18n="3d.hero">Explore our 3D Dining Room</span> ↗</a>
+      <div class="hero-actions"><a class="cta-3d canva-button" href="3d-room.html" data-room-link="true"><span class="cta-3d-badge" data-i18n="3d.badge">Live 3D</span><span class="cta-3d-shine" aria-hidden="true"></span><span class="cta-3d-icon"><span class="cube" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i></span></span><span class="cta-3d-text"><strong data-i18n="3d.hero">Explore our 3D Dining Room</strong><small data-i18n="3d.sub">Walk in and pick your table</small></span><span class="cta-3d-arrow" aria-hidden="true">↗</span></a><span class="hero-break" aria-hidden="true"></span>
        <a class="primary-btn canva-button" href="#menu"><span data-i18n="hero.btn1">Explore the Menu</span> <i data-lucide="arrow-up-right"></i></a>
        <a class="outline-btn canva-button" href="#about"><span data-i18n="hero.btn2">Our Story</span> <i data-lucide="arrow-right"></i></a>
       </div>
@@ -226,9 +252,6 @@
      <div class="hero-visual">
             <div class="hero-photo-wrap">
        <img id="hero-image" class="hero-photo canva-image" src="https://images.pexels.com/photos/37068830/pexels-photo-37068830.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=1100" referrerpolicy="no-referrer" alt="Delicious grilled octopus served elegantly on a textured white plate." data-i18n-alt="hero.alt" loading="lazy">
-      </div>
-      <div class="floating-note canva-card">
-       <span class="note-icon"><i data-lucide="sun"></i></span><span><strong data-i18n="hero.note1">Made with sunshine</strong><small data-i18n="hero.note2">Fresh flavors, every day</small></span>
       </div>
      </div>
     </section>
@@ -302,10 +325,10 @@
         'hero.eyebrow':'A little taste of the coast',
         'hero.title':'Savor the <em>sunshine.</em>',
         'hero.copy':'An invitation to slow down, gather close, and discover the vibrant flavors of the Mediterranean—one beautiful plate at a time.',
-        '3d.nav':'Explore 3D Tables','3d.hero':'Explore our 3D Dining Room','3d.footer':'3D Table Reservations',
+        '3d.nav':'Explore 3D Tables','3d.hero':'Explore our 3D Dining Room','3d.badge':'Live 3D','3d.sub':'Walk in and pick your table','3d.footer':'3D Table Reservations',
         'hero.btn1':'Explore the Menu','hero.btn2':'Our Story',
         'hero.alt':'Delicious grilled octopus served elegantly on a textured white plate.',
-        'hero.note1':'Made with sunshine','hero.note2':'Fresh flavors, every day',
+        
         'intro.eyebrow':'Welcome to Gourmet',
         'intro.title':'Where every meal feels like <em>a long summer afternoon.</em>',
         'intro.copy':'Inspired by coastal tables and time-honored recipes, we bring together honest ingredients, generous hospitality, and the simple joy of sharing good food.',
@@ -339,10 +362,10 @@
         'hero.eyebrow':'Kıyıdan küçük bir lezzet',
         'hero.title':'Güneşin <em>lezzeti.</em>',
         'hero.copy':'Acele etmeden, sofranın etrafında bir araya gelip Akdeniz’in capcanlı tatlarını keşfetmeye davetlisiniz; her seferinde bir güzel tabakla.',
-        '3d.nav':'3D Masaları Keşfet','3d.hero':'3D Restoranımızı Keşfedin','3d.footer':'3D Masa Rezervasyonu',
+        '3d.nav':'3D Masaları Keşfet','3d.hero':'3D Restoranımızı Keşfedin','3d.badge':'Canlı 3D','3d.sub':'İçeri girin, masanızı seçin','3d.footer':'3D Masa Rezervasyonu',
         'hero.btn1':'Menüyü Keşfedin','hero.btn2':'Hikâyemiz',
         'hero.alt':'Dokulu beyaz bir tabakta şık biçimde servis edilen lezzetli közlenmiş ahtapot.',
-        'hero.note1':'Güneşle pişer','hero.note2':'Her gün taptaze lezzetler',
+        
         'intro.eyebrow':'Gourmet’ye hoş geldiniz',
         'intro.title':'Her sofra, uzun bir <em>yaz ikindisi</em> kadar keyifli.',
         'intro.copy':'Kıyı sofralarından ve kuşaktan kuşağa geçen tariflerden ilham alıyoruz. Dürüst malzemeyi, cömert bir misafirperverliği ve güzel yemeği paylaşmanın sade mutluluğunu bir araya getiriyoruz.',
@@ -376,10 +399,10 @@
         'hero.eyebrow':'Ein Hauch von Küste',
         'hero.title':'Sonne <em>auf dem Teller.</em>',
         'hero.copy':'Nehmen Sie sich Zeit, rücken Sie zusammen und entdecken Sie die lebendigen Aromen des Mittelmeers – Teller für Teller.',
-        '3d.nav':'3D-Tische entdecken','3d.hero':'Unseren 3D-Gastraum entdecken','3d.footer':'3D-Tischreservierung',
+        '3d.nav':'3D-Tische entdecken','3d.hero':'Unseren 3D-Gastraum entdecken','3d.badge':'Live 3D','3d.sub':'Eintreten und Tisch wählen','3d.footer':'3D-Tischreservierung',
         'hero.btn1':'Speisekarte entdecken','hero.btn2':'Unsere Geschichte',
         'hero.alt':'Köstlicher gegrillter Oktopus, elegant auf einem strukturierten weißen Teller angerichtet.',
-        'hero.note1':'Mit Sonne gekocht','hero.note2':'Jeden Tag frisch',
+        
         'intro.eyebrow':'Willkommen im Gourmet',
         'intro.title':'Wo jedes Essen sich anfühlt wie <em>ein langer Sommernachmittag.</em>',
         'intro.copy':'Inspiriert von Tafeln am Meer und altbewährten Rezepten vereinen wir ehrliche Zutaten, großzügige Gastfreundschaft und die einfache Freude, gutes Essen zu teilen.',
