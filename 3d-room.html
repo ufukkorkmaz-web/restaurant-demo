@@ -85,6 +85,10 @@
 body.seat-mode .seat-bar{display:flex}body.seat-mode .side,body.seat-mode .heading,body.seat-mode .legend,body.seat-mode .bottom,body.seat-mode .view-help,body.seat-mode .mobile,body.seat-mode #selected-marker,body.seat-mode .seat-card{display:none!important}
 @media(max-width:800px){.seat-card{display:none!important}.seat-bar{border-radius:22px;gap:8px;padding:8px 10px}.seat-bar-info small{display:none}.seat-bar .solid{padding:9px 12px;font-size:11px}}
 .fade{position:fixed;inset:0;z-index:30;background:#0a0f0e;opacity:0;pointer-events:none;transition:opacity .22s ease}.fade.on{opacity:1}@media(prefers-reduced-motion:reduce){.fade{transition:none}}
+#selected-marker.peek{pointer-events:auto!important;cursor:pointer;padding:12px 22px!important;font-size:13px!important;letter-spacing:.07em;-webkit-tap-highlight-color:transparent;animation:markerPop .5s cubic-bezier(.2,1.5,.4,1) both,markerGlow 1.7s ease-in-out .5s infinite}
+@keyframes markerPop{from{scale:.3;opacity:0}to{scale:1;opacity:1}}
+@keyframes markerGlow{0%,100%{box-shadow:0 0 20px #d9a36088,0 0 0 0 #ffd89a77;border-color:#ffe1aeaa}50%{box-shadow:0 0 46px #ffc477dd,0 0 0 14px #ffd89a00;border-color:#fff0d0}}
+@media(prefers-reduced-motion:reduce){#selected-marker.peek{animation:none;box-shadow:0 0 34px #ffc477cc}}
 </style></head><body><div id="scene"></div><div class="loading" id="loading"><strong>Gourmet<span style="color:#d6aa70">.</span></strong><p data-i18n="loading">PREPARING YOUR PRIVATE TOUR</p></div><div class="no3d" id="no3d"><div><h2 data-i18n="no3d">3D preview unavailable</h2><p data-i18n="no3dExplain">This experience requires WebGL and an internet connection to load the 3D engine.</p></div></div>
 <header class="top"><div class="brand">Gourmet<b>.</b><small data-i18n="brandTag">THE PRIVATE DINING EXPERIENCE</small></div><div class="right"><a class="ghost" href="index.html" id="back-home" style="text-decoration:none;display:inline-flex;align-items:center" aria-label="Back to Gourmet home">← Home</a><button class="ghost" id="reset" data-i18n="reset">↺ Reset view</button><button class="ghost" id="mine"><span data-i18n="myReservations">My reservations</span> <span id="count">0</span></button><button class="solid" id="choose" data-i18n="explore">Explore tables</button></div></header>
 <div id="selected-marker" aria-live="polite" style="display:none;position:absolute;z-index:12;pointer-events:none;transform:translate(-50%,-100%);border:1px solid #ffe1aeaa;border-radius:99px;padding:8px 14px;background:#201c15e8;color:#ffe6b7;font-size:12px;font-weight:700;white-space:nowrap;box-shadow:0 0 26px #d9a36077" data-i18n="selectedMarker">Selected table</div><div class="view-help" id="view-help" data-i18n="help">Eye level · WASD to walk · drag to look · select a table</div><div class="heading"><div class="eyebrow" data-i18n="eyebrow">An immersive table selection</div><h1 data-i18n-html="heading">Find your perfect<br><i>place at the table.</i></h1><p data-i18n="intro">Inspired directly by the supplied interior: charcoal panelled walls, amber leather banquettes, grey chairs, round marble tables, the sculptural ceiling and the copper-lit bar. Select any table.</p></div>
@@ -120,7 +124,7 @@ const host=document.getElementById('scene'),loading=document.getElementById('loa
 const renderer=new THREE.WebGLRenderer({antialias:true,powerPreference:'high-performance'});renderer.setSize(innerWidth,innerHeight);renderer.setPixelRatio(Math.min(devicePixelRatio,2));renderer.shadowMap.enabled=true;renderer.shadowMap.type=THREE.PCFSoftShadowMap;renderer.toneMapping=THREE.ACESFilmicToneMapping;renderer.toneMappingExposure=1.35;renderer.outputColorSpace=THREE.SRGBColorSpace;host.appendChild(renderer.domElement);
 const scene=new THREE.Scene();scene.background=new THREE.Color(0x151a1b);scene.fog=new THREE.FogExp2(0x16191b,.018);
 const camera=new THREE.PerspectiveCamera(69,innerWidth/innerHeight,.05,90);camera.position.set(-1.2,1.72,8.6);let yaw=-.08,pitch=-.07;
-let focusMotion=null;let eyeY=1.72,standPose=null;const seatMode={active:false,ready:false,table:null,seat:0,yaw:0,prev:null};
+let focusMotion=null;let eyeY=1.72,standPose=null,peek=null;const seatMode={active:false,ready:false,table:null,seat:0,yaw:0,prev:null};
 const mat=(c,rough=.6,metal=0)=>new THREE.MeshStandardMaterial({color:c,roughness:rough,metalness:metal});
 const wood=mat(0x17191e,.38,.04),woodTrim=mat(0x26262b,.31,.08),copper=mat(0xb37342,.20,.86),gold=mat(0xb59466,.24,.8),marble=mat(0xcbd0d3,.24,.11),seat=mat(0xb77c61,.75),chairMat=mat(0x505159,.79),black=mat(0x15191a,.38,.3),floorMat=mat(0x181c22,.10,.2);
 const box=(w,h,d,m,x,y,z,parent=scene)=>{const o=new THREE.Mesh(new THREE.BoxGeometry(w,h,d),m);o.position.set(x,y,z);o.castShadow=true;o.receiveShadow=true;parent.add(o);return o};
@@ -298,7 +302,7 @@ const raycaster=new THREE.Raycaster(),pointer=new THREE.Vector2();function pickT
  raycaster.setFromCamera(pointer,camera);
  // All meshes of a chair/table resolve to the same ID; nearest hit wins.
  const hits=raycaster.intersectObjects(selectable,false);
- if(hits.length){const id=hits[0].object.userData.table;if(id)openTable(id)}
+ if(hits.length){const id=hits[0].object.userData.table;if(id){if(touchOnly()&&peek!==id)previewTable(id);else openTable(id)}}else if(peek)hidePanel()
 }
 const storageKey='gourmet-3d-bookings-v1';let bookings=[];try{bookings=JSON.parse(localStorage.getItem(storageKey)||'[]');if(!Array.isArray(bookings))bookings=[]}catch{}const save=()=>{try{localStorage.setItem(storageKey,JSON.stringify(bookings))}catch{}};
 const sameSlot=(a,b)=>a.date===b.date&&a.time===b.time&&a.table===b.table;const today=()=>{const now=new Date(),m=new Date(now.getTime()-now.getTimezoneOffset()*60000);return m.toISOString().slice(0,10)};const inputDate=document.getElementById('date');inputDate.min=today();inputDate.value=today();const $=id=>document.getElementById(id);
@@ -348,6 +352,7 @@ function animateCameraFocus(dt){
 function openTable(id){
  if(!tables.some(t=>t.id===id))return;
  leaveSeat({panel:false,instant:true});
+ peek=null;{const m=$('selected-marker');m.classList.remove('peek');m.removeAttribute('role');m.removeAttribute('tabindex')}
  selected=id;focusOnTable(id);
  const t=tables.find(t=>t.id===id);
  $('table-title').textContent=tr('table')+' '+id.slice(1);
@@ -368,7 +373,7 @@ function stepTable(direction){
 }
 $('table-prev').addEventListener('click',()=>stepTable(-1));
 $('table-next').addEventListener('click',()=>stepTable(1));
-function hidePanel(){leaveSeat({panel:false,instant:true});hideCard();$('side').classList.remove('open');selected=null;$('selected-marker').style.display='none';updateSpotlight();reflect()}$('close').onclick=hidePanel;for(const el of [inputDate,$('time')])el.addEventListener('change',reflect);
+function hidePanel(){leaveSeat({panel:false,instant:true});hideCard();peek=null;{const m=$('selected-marker');m.classList.remove('peek');m.removeAttribute('role');m.removeAttribute('tabindex')}$('side').classList.remove('open');selected=null;$('selected-marker').style.display='none';updateSpotlight();reflect()}$('close').onclick=hidePanel;for(const el of [inputDate,$('time')])el.addEventListener('change',reflect);
 $('reset').onclick=()=>{hidePanel();camera.position.set(-1.2,1.72,8.6);yaw=-.08;pitch=-.07;focusMotion=null};$('choose').onclick=()=>{openTable('T01')};
 function toast(msg){$('toast').textContent=msg;$('toast').classList.add('show');setTimeout(()=>$('toast').classList.remove('show'),3500)};
 $('booking-form').addEventListener('submit',e=>{e.preventDefault();if(!selected)return;const date=inputDate.value,time=$('time').value;if(date<today()){toast(tr('future'));return}const booking={id:Math.random().toString(36).slice(2,10),table:selected,date,time,party:Number($('party').value),name:$('guest').value.trim(),email:$('email').value.trim(),preorder:{quantities:[...preorderDraft.quantities],notes:preorderDraft.notes}};if(dateTimeOccupied(selected)){reflect();return}bookings.push(booking);save();preorderDraft={quantities:[0,0,0,0],notes:''};updatePreorderSummary();hidePanel();updateCount();toast(tr('reservedToast').replace('{table}',booking.table.slice(1)).replace('{party}',booking.party).replace('{date}',date).replace('{time}',time))});
@@ -379,6 +384,21 @@ function updateCount(){
  document.querySelectorAll('[data-cancel]').forEach(b=>b.onclick=()=>{bookings=bookings.filter(x=>x.id!==b.dataset.cancel);save();updateCount();reflect();toast(tr('cancelled'))});
 }
 $('mine').onclick=()=>{$('reservations').classList.toggle('open');$('side').classList.remove('open')};$('close-mine').onclick=()=>$('reservations').classList.remove('open');updateCount();reflect();
+// ---- Phones: first tap previews the table (glowing name pill), tapping the pill opens the reservation panel ----
+const touchOnly=()=>matchMedia('(hover:none) and (pointer:coarse)').matches;
+function previewTable(id){
+ const t=tables.find(v=>v.id===id);if(!t)return;
+ leaveSeat({panel:false,instant:true});
+ $('side').classList.remove('open');$('reservations').classList.remove('open');
+ selected=id;peek=id;focusOnTable(id);
+ const m=$('selected-marker');m.textContent='✦ '+tr('table').toUpperCase()+' '+id.slice(1);
+ m.setAttribute('role','button');m.setAttribute('tabindex','0');
+ m.classList.remove('peek');void m.offsetWidth;m.classList.add('peek');m.style.display='block';
+ updateSpotlight();reflect();
+}
+{const m=$('selected-marker');
+ const go=()=>{if(peek)openTable(peek)};
+ m.addEventListener('click',go);m.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();go()}});}
 // ---- "View from this seat": live hover/select preview + full seated view ----
 const SEAT_EYE=1.2,SEAT_PITCH=-.2,BAR_FOCUS={x:6.8,z:-5.8};
 const $card=$('seat-card'),$win=$('sc-window'),$fade=$('fade');
